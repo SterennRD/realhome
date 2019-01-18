@@ -13,3 +13,25 @@ function insert_css() {
     // On ajoute le js au thème
     wp_enqueue_script( 'script-js', get_template_directory_uri() .'/assets/js/script.js');
 }
+
+// Custom post type propriété
+function create_post_type() { register_post_type('propriete',
+    array(
+        'label' => __('Propriétés'),
+        'singular_label' => __('Propriété'),
+        'add_new_item' => __( 'Ajouter une propriété' ),
+        'edit_item' => __( 'Modifier une propriété' ),
+        'new_item' => __( 'Nouvelle propriété' ),
+        'view_item' => __( 'Voir la propriété' ),
+        'search_items' => __( 'Rechercher une propriété' ),
+        'not_found' => __( 'Aucune propriété trouvée' ),
+        'not_found_in_trash' => __( 'Aucune propriété trouvée' ),
+        'public' => true, 'show_ui' => true, 'capability_type' => 'post',
+        'has_archive' => true, 'hierarchical' => true,
+        'menu_icon' => 'dashicons-admin-home',
+        'taxonomies' => array('types'),
+        'supports' => array( 'title', 'editor', 'thumbnail'),
+        'rewrite' => array('slug' => 'propriete', 'with_front' => true)
+    )
+);
+}
