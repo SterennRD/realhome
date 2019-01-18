@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,800|Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700,800|Playfair+Display');
 body {
   margin: 0;
+  font-family: 'Raleway', sans-serif;
 }
 a,
 a:hover,
@@ -13,6 +14,8 @@ a:active {
   background: #fff;
   box-shadow: 0 2px 8px #e8e8e8;
   height: 90px;
+  position: relative;
+  z-index: 100;
   &__container {
     align-items: center;
     display: flex;
@@ -22,7 +25,6 @@ a:active {
     align-items: center;
     color: #3c3c3c;
     display: flex;
-    font-family: 'Raleway', sans-serif;
     font-size: 24px;
     height: 45px;
     justify-content: center;
@@ -143,5 +145,94 @@ a:active {
         content: '\f231';
       }
     }
+  }
+}
+
+// BANNIERE PAGE D'ACCUEIL
+.banner {
+  align-items: center;
+  display: flex;
+  height: calc(100vh - 90px);
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  &__img {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  &__title {
+    color: #fff;
+    font-weight: 700;
+    padding: 0 15px;
+    position: relative;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+// PAGE D'ACCUEIL
+.home_article {
+  padding-bottom: 120px;
+  padding-top: 120px;
+  &__title {
+    align-self: flex-start;
+    color: #3c3c3c;
+    margin: 0;
+    text-align: right;
+    &::after {
+      background: #3c3c3c;
+      bottom: -20px;
+      content: "";
+      height: 2px;
+      position: absolute;
+      right: 15px;
+      width: 30px;
+    }
+  }
+  p {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    line-height: 1.7em;
+  }
+}
+
+// FEATURES PAGE D'ACCUEIL
+.features {
+  background-color: #fafafa;
+  color: #3c3c3c;
+  padding: 100px 0;
+  &__block {
+    text-align: center;
+  }
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+  &__txt {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    line-height: 1.7em;
+    margin-bottom: 0;
+  }
+}
+
+// PARTENAIRES PAGE D'ACCUEIL
+.partners {
+  align-items: center;
+  display: flex;
+  padding-bottom: 100px;
+  padding-top: 100px;
+  &__title {
+    margin-bottom: 0;
+    margin-right: auto;
+    margin-top: 0;
+  }
+  &__logo {
+    margin-left: 50px;
   }
 }
