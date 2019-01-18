@@ -236,3 +236,132 @@ a:active {
     margin-left: 50px;
   }
 }
+
+// FOOTER
+.footer {
+  background: #303030;
+  padding-bottom: 80px;
+  padding-top: 80px;
+  &__logo {
+    align-items: center;
+    color: #acacac;
+    display: flex;
+    font-size: 24px;
+    height: 45px;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+    text-transform: uppercase;
+    width: 170px;
+    &::after {
+      border-right: 1px inset #acacac;
+      border-top: 1px inset #acacac;
+      content: "";
+      display: block;
+      height: 10px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 10px;
+    }
+    &::before {
+      border-left: 1px inset #acacac;
+      border-top: 1px inset #acacac;
+      content: "";
+      display: block;
+      height: 10px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 10px;
+    }
+    span {
+      &::after {
+        border-right: 1px inset #acacac;
+        border-bottom: 1px inset #acacac;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 10px;
+        position: absolute;
+        right: 0px;
+        width: 10px;
+      }
+      &::before {
+        border-left: 1px inset #acacac;
+        border-bottom: 1px inset #acacac;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 10px;
+        left: 0px;
+        position: absolute;
+        width: 10px;
+      }
+    }
+  }
+  &__menu {
+    margin-left: auto;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      a {
+        color: #fff;
+        font-family: 'Playfair Display', serif;
+        font-size: 12px;
+        transition: background-color 0.3s;
+        &:hover {
+          color: #f2f2f2;
+        }
+      }
+    }
+  }
+  &__menu_rs {
+    ul {
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      a {
+        align-items: center;
+        background-color: #fff;
+        border-radius: 50%;
+        color: #3c3c3c;
+        display: flex;
+        font-size: 0;
+        height: 32px;
+        justify-content: center;
+        margin-right: 10px;
+        transition: 0.3s;
+        width: 32px;
+        &::before {
+          display: inline-block;
+          font-family: "Font Awesome 5 Brands";
+          font-size: 18px;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 400;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+        }
+        &:hover {
+          background-color: #cacaca;
+        }
+      }
+      .facebook a::before {
+        content: '\f39e';
+      }
+      .instagram a::before {
+        content: "\f16d";
+      }
+      .pinterest a::before {
+        content: '\f231';
+      }
+    }
+  }
+  &__title {
+    color: #fff;
+    font-size: 20px;
+  }
+}
