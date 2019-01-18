@@ -11,9 +11,13 @@
 </head>
 <body <?php body_class(); ?>>
 
-        <header>
-            <a href="<?php echo bloginfo('url'); ?>" class="logo">
-                Real<b>Home</b>
-            </a>
-            <?php wp_nav_menu(array( 'theme_location' => 'menu-principal','container' => 'nav')); ?>
+        <header class="header">
+            <div class="container header__container">
+                <a href="<?php echo bloginfo('url'); ?>" class="header__logo">
+                    Real<b>Home</b><span></span>
+                </a>
+                <?php wp_nav_menu(array( 'theme_location' => 'menu-principal','container' => 'nav', 'container_class' => 'header__menu')); ?>
+                <?php wp_nav_menu(array( 'theme_location' => 'menu-secondaire','container' => 'nav', 'container_class' => 'header__menu_rs')); ?>
+            </div>
+
         </header>

@@ -3,11 +3,16 @@ add_action('wp_enqueue_scripts', 'insert_css');
 function insert_css() {
     // On ajoute le css general du theme
     wp_enqueue_style('style', get_stylesheet_uri());
+    wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
     wp_enqueue_style('style2', get_template_directory_uri() .'/style2.css');
+    wp_enqueue_style('fa', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+
 
     // On ajoute le jQuery au thème
     wp_register_script('jquery2', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js');
     wp_enqueue_script('jquery2');
+
+    wp_enqueue_script( 'fa-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js');
 
 
     // On ajoute le js au thème

@@ -1,4 +1,147 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:500,600,900|Cousine');
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,800|Playfair+Display');
 body {
   margin: 0;
+}
+a,
+a:hover,
+a:active {
+  text-decoration: none;
+}
+
+// HEADER
+.header {
+  background: #fff;
+  box-shadow: 0 2px 8px #e8e8e8;
+  height: 90px;
+  &__container {
+    align-items: center;
+    display: flex;
+    height: 100%;
+  }
+  &__logo {
+    align-items: center;
+    color: #3c3c3c;
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    font-size: 24px;
+    height: 45px;
+    justify-content: center;
+    position: relative;
+    text-transform: uppercase;
+    width: 170px;
+    &::after {
+      border-right: 1px inset #3c3c3c;
+      border-top: 1px inset #3c3c3c;
+      content: "";
+      display: block;
+      height: 10px;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      width: 10px;
+    }
+    &::before {
+      border-left: 1px inset #3c3c3c;
+      border-top: 1px inset #3c3c3c;
+      content: "";
+      display: block;
+      height: 10px;
+      left: 0px;
+      position: absolute;
+      top: 0px;
+      width: 10px;
+    }
+    span {
+      &::after {
+        border-right: 1px inset #3c3c3c;
+        border-bottom: 1px inset #3c3c3c;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 10px;
+        position: absolute;
+        right: 0px;
+        width: 10px;
+      }
+      &::before {
+        border-left: 1px inset #3c3c3c;
+        border-bottom: 1px inset #3c3c3c;
+        bottom: 0;
+        content: "";
+        display: block;
+        height: 10px;
+        left: 0px;
+        position: absolute;
+        width: 10px;
+      }
+    }
+  }
+  &__menu {
+    height: 100%;
+    margin-left: auto;
+    ul {
+      display: flex;
+      height: 100%;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      a {
+        align-items: center;
+        background-color: transparent;
+        display: flex;
+        color: #3c3c3c;
+        font-family: 'Playfair Display', serif;
+        height: 100%;
+        padding-left: 25px;
+        padding-right: 25px;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+  &__menu_rs {
+    ul {
+      display: flex;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      a {
+        align-items: center;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        color: #3c3c3c;
+        display: flex;
+        font-size: 0;
+        height: 36px;
+        justify-content: center;
+        margin-left: 10px;
+        transition: 0.3s;
+        width: 36px;
+        &::before {
+          display: inline-block;
+          font-family: "Font Awesome 5 Brands";
+          font-size: 18px;
+          font-style: normal;
+          font-variant: normal;
+          font-weight: 400;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+        }
+        &:hover {
+          border-color: #3c3c3c;
+        }
+      }
+      .facebook a::before {
+        content: '\f39e';
+      }
+      .instagram a::before {
+        content: "\f16d";
+      }
+      .pinterest a::before {
+        content: '\f231';
+      }
+    }
+  }
 }
