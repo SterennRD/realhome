@@ -35,3 +35,25 @@ function create_post_type() { register_post_type('propriete',
     )
 );
 }
+
+// Custom post type équipe
+function create_post_type() { register_post_type('equipe',
+    array(
+        'label' => __('Equipiers'),
+        'singular_label' => __('Equipier'),
+        'add_new_item' => __( 'Ajouter un équipier' ),
+        'edit_item' => __( 'Modifier un équipier' ),
+        'new_item' => __( 'Nouvel équipier' ),
+        'view_item' => __( 'Voir l\'équipier' ),
+        'search_items' => __( 'Rechercher un équipier' ),
+        'not_found' => __( 'Aucun équipier trouvé' ),
+        'not_found_in_trash' => __( 'Aucun équipier trouvé' ),
+        'public' => true, 'show_ui' => true, 'capability_type' => 'post',
+        'has_archive' => true, 'hierarchical' => true,
+        'menu_icon' => 'dashicons-businessman',
+        'taxonomies' => array('types'),
+        'supports' => array( 'title', 'editor', 'thumbnail'),
+        'rewrite' => array('slug' => 'equipe', 'with_front' => true)
+    )
+);
+}
