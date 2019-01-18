@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700,800|Playfair+Display');
 body {
   margin: 0;
+  min-height: 100vh;
   font-family: 'Raleway', sans-serif;
 }
 a,
@@ -28,9 +29,15 @@ a:active {
     font-size: 24px;
     height: 45px;
     justify-content: center;
+    letter-spacing: 0px;
     position: relative;
     text-transform: uppercase;
+    transition: 0.3s;
     width: 170px;
+    &:hover {
+      color: #cacaca;
+      letter-spacing: 2px;
+    }
     &::after {
       border-right: 1px inset #3c3c3c;
       border-top: 1px inset #3c3c3c;
@@ -363,5 +370,65 @@ a:active {
   &__title {
     color: #fff;
     font-size: 20px;
+  }
+}
+
+// LISTE DES PROPRIETES
+.properties {
+  padding-top: 100px;
+  &__title {
+    color: #3c3c3c;
+    font-weight: 800;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  &__card {
+    border: 1px solid #e6e6e6;
+    border-radius: 5px;
+    height: 430px;
+    overflow: hidden;
+  }
+  &__img {
+    height: 245px;
+    overflow: hidden;
+  }
+  &__desc {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 245px);
+  }
+  &__link {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    a {
+      color: #3c3c3c;
+    }
+  }
+  &__city {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    a {
+      color: #cacaca;
+    }
+  }
+  &__price {
+    color: #e2574c;
+    font-weight: 600;
+  }
+  &__details {
+    align-items: center;
+    border-top: 1px solid #e6e6e6;
+    display: flex;
+    font-size: 12px;
+    height: 45px;
+    justify-content: center;
+    margin-top: auto;
+    width: 100%;
+    div {
+      margin-left: 5px;
+      margin-right: 5px;
+    }
   }
 }

@@ -71,3 +71,21 @@ function create_post_type() { register_post_type('propriete',
     );
 }
 add_action( 'init', 'create_post_type' );
+
+// Créer une taxonomie
+function themes_taxonomy() {
+    register_taxonomy(
+        'ville',
+        'propriete', // nom du custom type
+        array(
+            'label' => 'Ville', // Nom de la taxonomie (dans le back)
+            'query_var' => true, // Pouvoir faire des requêtes
+            'rewrite' => array(
+                'slug' => 'ville',
+                'with_front' => true
+            ),
+            'hierarchical' => true, // pour créer des catégories et non pas des étiquettes
+        )
+    );
+}
+add_action( 'init', 'themes_taxonomy');
