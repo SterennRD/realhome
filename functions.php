@@ -8,6 +8,10 @@ function insert_css() {
     wp_enqueue_style('fa', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
 
 
+
+}
+
+function add_js_scripts() {
     // On ajoute le jQuery au thème
     wp_register_script('jquery2', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js');
     wp_enqueue_script('jquery2');
@@ -16,8 +20,12 @@ function insert_css() {
 
 
     // On ajoute le js au thème
-    wp_enqueue_script( 'script-js', get_template_directory_uri() .'/assets/js/script.js');
+    wp_enqueue_script( 'script', get_template_directory_uri().'/assets/js/script.js', array('jquery'), '1.0', true );
+
+    // pass Ajax Url to script.js
+    wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
 }
+add_action('wp_enqueue_scripts', 'add_js_scripts');
 
 // Définition des menus dans l'admin
 add_theme_support('menus');
@@ -46,7 +54,9 @@ function create_post_type() { register_post_type('propriete',
         'menu_icon' => 'dashicons-admin-home',
         'taxonomies' => array('types'),
         'supports' => array( 'title', 'editor', 'thumbnail'),
-        'rewrite' => array('slug' => 'propriete', 'with_front' => true)
+        'rewrite' => array('slug' => 'propriete', 'with_front' => true),
+        'show_in_rest'       => true,
+        'rest_base'          => 'propriete',
     )
 );
 // Custom post type équipe
@@ -85,7 +95,37 @@ function themes_taxonomy() {
                 'with_front' => true
             ),
             'hierarchical' => true, // pour créer des catégories et non pas des étiquettes
+            'show_in_rest' => true,
         )
     );
 }
 add_action( 'init', 'themes_taxonomy');
+
+add_action( 'wp_ajax_mon_action', 'mon_action' );
+add_action( 'wp_ajax_nopriv_mon_action', 'mon_action' );
+
+function mon_action() {
+    $slug = $_POST['param'];
+    $args = array(
+        'post_type' => 'propriete',
+        'posts_per_page' => 10,
+        'order' => 'DESC',
+        'order by' => 'rand',
+        'tax_query' => array(
+            array (
+                'taxonomy' => 'ville',
+                'field' => 'slug',
+                'terms' => [$slug],
+            )
+        ),
+    );
+
+    $ajax_query = new WP_Query($args);
+
+    if ( $ajax_query->have_posts() ) : while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
+        get_template_part( 'propriete-card' );
+    endwhile;
+    endif;
+
+    die();
+}

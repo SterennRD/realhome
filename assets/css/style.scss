@@ -375,6 +375,7 @@ a:active {
 
 // LISTE DES PROPRIETES
 .properties {
+  padding-bottom: 100px;
   padding-top: 100px;
   &__title {
     color: #3c3c3c;
@@ -386,11 +387,15 @@ a:active {
     border: 1px solid #e6e6e6;
     border-radius: 5px;
     height: 430px;
+    margin-bottom: 20px;
     overflow: hidden;
   }
   &__img {
     height: 245px;
     overflow: hidden;
+    img {
+      max-height: 100%;
+    }
   }
   &__desc {
     align-items: center;
@@ -401,6 +406,7 @@ a:active {
   &__link {
     font-size: 18px;
     font-weight: 600;
+    margin-top: auto;
     text-align: center;
     a {
       color: #3c3c3c;
