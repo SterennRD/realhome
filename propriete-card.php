@@ -1,7 +1,7 @@
 <div class="col-sm-12 col-md-6 col-lg-4">
     <div class="properties__card">
         <a href="<?php the_permalink() ?>">
-            <div class="properties__img">
+            <div class="properties__img <?php if (!has_post_thumbnail()) : ?>properties__img--empty<?php endif; ?>">
                 <?php if (has_post_thumbnail()) : ?>
                     <img src="<?php the_post_thumbnail_url('large') ?>" />
                 <?php endif; ?>
