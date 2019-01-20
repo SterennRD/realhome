@@ -138,3 +138,14 @@ function filter_city() {
 
     die();
 }
+
+// Insertion sidebar
+if ( function_exists('register_sidebar') )
+    register_sidebar(array(
+        'name'=>'Sidebar',
+        'id' => 'primary',
+        'before_widget' => '<div class="sidebar__widget">',
+        'after_widget' => '</div>',
+        'before_title' => '<h2 class="sidebar__title">',
+        'after_title' => '</h2>',
+    ));
