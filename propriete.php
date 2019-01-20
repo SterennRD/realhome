@@ -9,40 +9,33 @@
         <?php endif; ?>
 
         <?php
-        // your taxonomy name
-        $tax = 'ville';
 
-        // get the terms of taxonomy
-        $terms = get_terms( $tax, [
-            'hide_empty' => false, // do not hide empty terms
+        $terms = get_terms( 'ville', [
+            'hide_empty' => false,
         ]);
 
-        $url = bloginfo('url');
-        var_dump($terms);
+        echo '<div class="filter">';
+        echo '<div class="filter__link filter__link--active" data-id="" href="">Tout</div>';
 
         // loop through all terms
         foreach( $terms as $term ) {
 
-            echo '<h4><a href="'. get_term_link( $term ) .'">'. $term->name .'</a></h4>';
-            echo '<a class="filter" data-id="' . $term->slug . '" href="';
-            echo bloginfo('url');
-            echo '/wp-json/wp/v2/propriete?ville=' . $term->term_id .'">' . $term->name .'</a>';
-            echo $term->term_id;
+            echo '<div class="filter__link" data-id="' . $term->slug . '"> '. $term->name .'</div>';
 
         }
+        echo '</div>';
 
-        $url = get_site_url();
-        $url .= '/wp-json/wp/v2/propriete?ville=6'; // path to your JSON file
-        $data = file_get_contents($url); // put the contents of the file into a variable
-        $characters = json_decode($data); // decode the JSON feed
-        var_dump($characters);
-        foreach( $characters as $character ) {
-
-            echo $character->title->rendered;
-
-        }
+//        $url = get_site_url();
+//        $url .= '/wp-json/wp/v2/propriete?ville=6'; // path to your JSON file
+//        $data = file_get_contents($url); // put the contents of the file into a variable
+//        $characters = json_decode($data); // decode the JSON feed
+//        var_dump($characters);
+//        foreach( $characters as $character ) {
+//
+//            echo $character->title->rendered;
+//
+//        }
         ?>
-        <?php echo do_shortcode('[searchandfilter fields="ville"]'); ?>
             <!-- // Les arguments  -->
         <?php $Posts = get_the_ID(); ?>
         <?php
@@ -52,13 +45,6 @@
             'order' => 'DESC',
             'order by' => 'rand',
             'posts__not_in' => array($Posts),
-            'tax_query' => array(
-                array (
-                    'taxonomy' => 'ville',
-                    'field' => 'slug',
-                    'terms' => ['rennes', 'paris'],
-                )
-            ),
         );
         ?>
 
@@ -72,8 +58,10 @@
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="properties__card">
                         <a href="<?php the_permalink() ?>">
-                            <div class="properties__img">
-                                <img src="<?php the_post_thumbnail_url('large') ?>" />
+                            <div class="properties__img <?php if (!has_post_thumbnail()) : ?>properties__img--empty<?php endif; ?>">
+                                <?php if (has_post_thumbnail()) : ?>
+                                    <img src="<?php the_post_thumbnail_url('large') ?>" />
+                                <?php endif; ?>
                             </div>
                             <div class="properties__desc">
                                 <h2 class="properties__link">

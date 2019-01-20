@@ -2,7 +2,9 @@
     <div class="properties__card">
         <a href="<?php the_permalink() ?>">
             <div class="properties__img">
-                <img src="<?php the_post_thumbnail_url('large') ?>" />
+                <?php if (has_post_thumbnail()) : ?>
+                    <img src="<?php the_post_thumbnail_url('large') ?>" />
+                <?php endif; ?>
             </div>
             <div class="properties__desc">
                 <h2 class="properties__link">

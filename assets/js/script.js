@@ -15,19 +15,27 @@ $(document).ready(function(){
     //     ;
     // });
 
-    $('.filter').on('click', function(el) {
+    $('.filter__link').on('click', function(el) {
         el.preventDefault();
-        var slug = $(this).attr("data-id");
-        jQuery.post(
-            ajaxurl,
-            {
-                'action': 'filter_city',
-                'param': slug
-            },
-            function(response){
-                $('.test').html(response);
-            }
-        );
+        $(this).siblings().removeClass('filter__link--active');
+        if ($(this).hasClass("filter__link--active")) {
+
+        } else {
+            $(this).addClass('filter__link--active');
+            $('.test').html("<b>Chargement...</b>");
+            var slug = $(this).attr("data-id");
+            jQuery.post(
+                ajaxurl,
+                {
+                    'action': 'filter_city',
+                    'param': slug
+                },
+                function(response){
+                    $('.test').html(response);
+                }
+            );
+        }
+
     });
 });
 

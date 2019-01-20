@@ -101,24 +101,33 @@ function themes_taxonomy() {
 }
 add_action( 'init', 'themes_taxonomy');
 
-add_action( 'wp_ajax_mon_action', 'mon_action' );
-add_action( 'wp_ajax_nopriv_mon_action', 'mon_action' );
+add_action( 'wp_ajax_filter_city', 'filter_city' );
+add_action( 'wp_ajax_nopriv_filter_city', 'filter_city' );
 
-function mon_action() {
-    $slug = $_POST['param'];
-    $args = array(
-        'post_type' => 'propriete',
-        'posts_per_page' => 10,
-        'order' => 'DESC',
-        'order by' => 'rand',
-        'tax_query' => array(
-            array (
-                'taxonomy' => 'ville',
-                'field' => 'slug',
-                'terms' => [$slug],
-            )
-        ),
-    );
+function filter_city() {
+    $keyword = $_POST['param'];
+    if ($_POST['param']) {
+        $args = array(
+            'post_type' => 'propriete',
+            'posts_per_page' => 10,
+            'order' => 'DESC',
+            'order by' => 'rand',
+            'tax_query' => array(
+                array (
+                    'taxonomy' => 'ville',
+                    'field' => 'slug',
+                    'terms' => [$keyword],
+                )
+            ),
+        );
+    } else {
+        $args = array(
+            'post_type' => 'propriete',
+            'posts_per_page' => 10,
+            'order' => 'DESC',
+            'order by' => 'rand',
+        );
+    }
 
     $ajax_query = new WP_Query($args);
 
