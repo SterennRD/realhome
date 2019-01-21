@@ -762,3 +762,28 @@ a:active {
   padding: 15px;
   width: 100%;
 }
+
+// PAGE A PROPOS
+.about {
+  padding-bottom: 60px;
+  padding-top: 60px;
+  &__title {
+    margin-bottom: 40px
+  }
+  &__article {
+    margin-bottom: 100px;
+    p {
+      color: #797979;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      line-height: 1.7em;
+      margin-bottom: 0;
+    }
+  }
+  &__img {
+    max-width: 100%;
+  }
+  &__team {
+    padding-top: 100px
+  }
+}
