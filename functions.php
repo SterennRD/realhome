@@ -23,6 +23,7 @@ function add_js_scripts() {
 
     // On ajoute le js au thème
     wp_enqueue_script( 'script', get_template_directory_uri().'/assets/js/script.js', array('jquery'), '1.0', true );
+    wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/slide.js', array('jquery'), '1.0', true );
 
     // pass Ajax Url to script.js
     wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );

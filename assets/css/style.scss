@@ -260,6 +260,56 @@ p {
       padding: 15px 40px;
     }
   }
+  &__team {
+    &_container {
+      height: 500px;
+      position: relative;
+    }
+    &_control {
+      cursor: pointer;
+      font-size: 40px;
+      position: absolute;
+      top: 50%;
+      z-index: 10;
+      &_left {
+        left: -40px;
+      }
+      &_right {
+        right: -40px;
+      }
+    }
+    &_wrapper {
+      overflow: hidden;
+    }
+    &_content {
+      display: flex;
+      flex-wrap: nowrap;
+
+    }
+    &_item {
+      height: 100%;
+      min-width: 100%;
+      overflow: hidden;
+    }
+    &_img {
+      width: 100%;
+    }
+    &_right {
+      display: flex;
+      flex-direction: column;
+    }
+    &_name {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 300px;
+    }
+    &_txt {
+      flex: 1;
+      overflow: auto;
+    }
+  }
 }
 
 

@@ -121,7 +121,57 @@
                     </div>
                 </div>
             </section>
+        <?php endif; ?>
+<!--    AFFICHAGE DES DERNIERES PROPRIETES-->
+        <?php
+        $args_team = array(
+            'post_type' => 'equipe',
+            'posts_per_page' => 6,
+            'order' => 'DESC',
+        );
+        ?>
 
+        <?php $the_query = new WP_Query($args_team);?>
+
+        <?php if ( $the_query->have_posts() ) : ?>
+            <?php $nb = 0; ?>
+            <section class="home__team">
+                <div class="container">
+                    <h2 class="home__team_title">Nos <b>agents</b></h2>
+                    <div class="row home__team_container">
+                        <div class="home__team_control home__team_control_left">
+                            <i class="fas fa-angle-left"></i>
+                        </div>
+                        <div class="home__team_control home__team_control_right">
+                            <i class="fas fa-angle-right"></i>
+                        </div>
+                        <div class="home__team_wrapper">
+                            <div class="home__team_content">
+                                <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+                                    <?php $nb++; ?>
+                                    <div class="home__team_item home__team_item--<?php echo $nb; ?> row m-0 p-0">
+                                        <div class="col-lg-4">
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <img class="home__team_img" src="<?php the_post_thumbnail_url('large') ?>" />
+                                            <?php endif; ?>
+                                        </div>
+
+                                        <div class="col-lg-8 home__team_right">
+                                            <h3 class="home__team_name"><?php the_title(); ?></h3>
+                                            <?php if (get_field('texte-team')) : ?>
+                                                <?php $texte = strip_tags(get_field('texte-team')); ?>
+                                                <p class="home__team_txt"><?php echo $texte; ?></p>
+                                            <?php endif; ?>
+                                        </div>
+                                    </div>
+                                <?php endwhile; ?>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </section>
         <?php endif; ?>
 
     <?php if (have_posts()) : ?>
