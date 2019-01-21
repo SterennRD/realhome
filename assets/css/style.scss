@@ -832,3 +832,73 @@ a:active {
     text-align: center;
   }
 }
+
+// PAGE CONTACT
+.contact {
+  padding-bottom: 100px;
+  padding-top: 100px;
+  &__title {
+    color: #3c3c3c;
+    font-weight: 800;
+  }
+  &__subtitle {
+    color: #242424;
+    font-family: 'Raleway', sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+  &__left {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+  }
+  &__infos {
+    line-height: 1.7em;
+    margin-bottom: 30px;
+  }
+  &__address {
+    font-weight: bold;
+  }
+  &__phone {
+    margin-top: 30px;
+  }
+  &__form {
+    font-size: 14px;
+    &_item {
+      input,
+      textarea {
+        border: 1px solid #e6e6e6;
+        border-radius: 3px;
+        margin-bottom: 20px;
+        padding: 10px;
+        width: 100%;
+      }
+      textarea {
+        width: 100%;
+      }
+    }
+    &_label {
+      width: 100%;
+      br {
+        display: none;
+      }
+    }
+    input[type=submit] {
+      background-color: #e2574c;
+      border: 0;
+      border-radius: 3px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 10px 15px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      &:hover {
+        background-color: #cc4a40;
+      }
+    }
+  }
+
+}
