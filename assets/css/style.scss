@@ -765,7 +765,7 @@ a:active {
 
 // PAGE A PROPOS
 .about {
-  padding-bottom: 60px;
+  padding-bottom: 120px;
   padding-top: 60px;
   &__title {
     margin-bottom: 40px
@@ -784,6 +784,51 @@ a:active {
     max-width: 100%;
   }
   &__team {
-    padding-top: 100px
+    padding-top: 100px;
+    &_title {
+      margin-bottom: 60px;
+    }
+  }
+}
+
+.team {
+  border: 1px solid #e6e6e6;
+  border-radius: 3px;
+  overflow: hidden;
+  &__img {
+    height: 290px;
+    overflow: hidden;
+    &--empty {
+      align-items: center;
+      background-color: #f3f2f2;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      &::before {
+        color: #fff;
+        content: "\f508";
+        font-family: "Font Awesome 5 Free";
+        font-size: 100px;
+        font-weight: 900;
+        position: absolute;
+      }
+    }
+    img {
+      width: 100%;
+    }
+  }
+  &__name {
+    color: #1f1f1f;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 20px;
+    text-align: center;
+  }
+  &__role {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: center;
   }
 }
