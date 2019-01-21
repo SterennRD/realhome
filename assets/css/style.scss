@@ -9,6 +9,28 @@ a:hover,
 a:active {
   text-decoration: none;
 }
+.button {
+  background-color: #e2574c;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 10px 15px;
+  text-transform: uppercase;
+  transition: 0.3s;
+  &:hover {
+    background-color: #cc4a40;
+    color: #fff;
+  }
+}
+p {
+  color: #797979;
+  font-family: 'Playfair Display', serif;
+  font-size: 12px;
+  line-height: 1.7em;
+}
 
 // HEADER
 .header {
@@ -183,31 +205,63 @@ a:active {
 }
 
 // PAGE D'ACCUEIL
-.home_article {
-  padding-bottom: 120px;
-  padding-top: 120px;
-  &__title {
-    align-self: flex-start;
-    color: #3c3c3c;
-    margin: 0;
-    text-align: right;
-    &::after {
-      background: #3c3c3c;
-      bottom: -20px;
-      content: "";
-      height: 2px;
-      position: absolute;
-      right: 15px;
-      width: 30px;
+.home {
+  &__article {
+    padding-bottom: 120px;
+    padding-top: 120px;
+    &__title {
+      align-self: flex-start;
+      color: #3c3c3c;
+      margin: 0;
+      text-align: right;
+      &::after {
+        background: #3c3c3c;
+        bottom: -20px;
+        content: "";
+        height: 2px;
+        position: absolute;
+        right: 15px;
+        width: 30px;
+      }
+    }
+    p {
+      color: #797979;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      line-height: 1.7em;
     }
   }
-  p {
-    color: #797979;
-    font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    line-height: 1.7em;
+  &__proprietes {
+    background-color: #f6f6f6;
+    padding-bottom: 100px;
+    padding-top: 100px;
+    &_title {
+      font-size: 30px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 70px;
+      position: relative;
+      &::after {
+        background-color: #e2574c;
+        bottom: -30px;
+        content: "";
+        height: 3px;
+        position: absolute;
+        left: calc(50% - 50px);
+        width: 100px;
+      }
+    }
+    &_txt {
+      margin: 0 auto 50px;
+      text-align: center;
+      width: 50%;
+    }
+    &_button {
+      padding: 15px 40px;
+    }
   }
 }
+
 
 // FEATURES PAGE D'ACCUEIL
 .features {
@@ -406,6 +460,7 @@ a:active {
     text-align: center;
   }
   &__card {
+    background-color: #fff;
     border: 1px solid #e6e6e6;
     border-radius: 5px;
     height: 430px;
