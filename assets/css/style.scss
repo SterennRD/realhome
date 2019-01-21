@@ -374,6 +374,25 @@ a:active {
     color: #fff;
     font-size: 20px;
   }
+  &__contact {
+    color: #fff;
+    margin-left: auto;
+    &_txt {
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+    }
+    &_address {
+      margin-bottom: 10px;
+    }
+    &_mail {
+      margin-top: 10px;
+      a {
+        color: #e2574c;
+        font-weight: bold;
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 // LISTE DES PROPRIETES
