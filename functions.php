@@ -6,6 +6,7 @@ function insert_css() {
     wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
     wp_enqueue_style('style2', get_template_directory_uri() .'/style2.css');
     wp_enqueue_style('fa', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
+    wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
 
 
 
@@ -17,6 +18,7 @@ function add_js_scripts() {
     wp_enqueue_script('jquery2');
 
     wp_enqueue_script( 'fa-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js');
+    wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js');
 
 
     // On ajoute le js au thème

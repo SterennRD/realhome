@@ -6,8 +6,31 @@
         <div class="contact">
             <div class="container">
                 <h1 class="contact__title"><?php the_title(); ?></h1>
-                <?php if(get_field('carte')) :?>
-                    <?php the_field('carte'); ?>
+
+                <?php if(get_field('lat') && get_field('lon')) :?>
+                    <?php $lat = get_field('lat'); $lon = get_field('lon'); ?>
+                    <script type="text/javascript">
+                        // On initialise la latitude et la longitude de Paris (centre de la carte)
+                        var lat = "<?php echo $lat; ?>";
+                        var lon = "<?php echo $lon; ?>";
+                        var macarte = null;
+
+                        // Fonction d'initialisation de la carte
+                        function initMap() {
+                            macarte = L.map('map').setView([lat, lon], 11);
+                            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                                attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
+                                minZoom: 1,
+                                maxZoom: 20
+                            }).addTo(macarte);
+                            var marker = L.marker([lat, lon]).addTo(macarte);
+                        }
+                        window.onload = function(){
+                            initMap();
+                        };
+                    </script>
+                    <div id="map" class="contact__map">
+                    </div>
                 <?php endif; ?>
                 <div class="row">
                     <div class="col-lg-4 contact__left">
@@ -34,7 +57,7 @@
                         <?php endif; ?>
 
                         <?php if(get_field('email')) :?>
-                            <div class="contact__mail">E-Mail : <b><?php the_field('email'); ?></b></div>
+                            <div class="contact__mail">E-Mail : <a href="mailto:<?php the_field('email'); ?>"><?php the_field('email'); ?></a></div>
                         <?php endif; ?>
 
                     </div>

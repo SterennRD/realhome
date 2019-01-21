@@ -840,6 +840,7 @@ a:active {
   &__title {
     color: #3c3c3c;
     font-weight: 800;
+    margin-bottom: 30px;
   }
   &__subtitle {
     color: #242424;
@@ -847,6 +848,10 @@ a:active {
     font-size: 30px;
     font-weight: 500;
     margin-bottom: 30px;
+  }
+  &__map{
+    height:400px;
+    margin-bottom: 60px;
   }
   &__left {
     color: #797979;
@@ -862,6 +867,13 @@ a:active {
   }
   &__phone {
     margin-top: 30px;
+  }
+  &__mail {
+    a {
+      color: #e2574c;
+      font-weight: bold;
+      text-decoration: underline;
+    }
   }
   &__form {
     font-size: 14px;
@@ -902,3 +914,4 @@ a:active {
   }
 
 }
+
