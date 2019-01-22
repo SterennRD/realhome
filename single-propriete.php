@@ -48,8 +48,8 @@
                             <p class="property__txt"><?php echo $description; ?></p>
                         <?php endif; ?>
                     </div>
-
                 </div>
+
                 <?php if(get_field('galerie')): ?>
                     <?php $size = 'medium';$images = get_field('galerie');?>
                         <div class="property__gallery" id="lightgallery">
@@ -61,8 +61,44 @@
                         </div>
                 <?php endif; ?>
 
+                <div class="property__features">
+                    <?php if(get_field('m2')): ?>
+                        <?php the_field('m2'); ?>m²
+                    <?php endif; ?>
+                    <h3 class="property__features_title">À l'intérieur</h3>
+                    <div class="row">
+                        <?php if(get_field('nb_pieces') && get_field('nb_pieces') > 0): ?>
+                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                                <i class="property__features_icon fas fa-door-closed"></i>
+                                <div>
+                                    <?php the_field('nb_pieces'); ?>
+                                    <label class="property__features_label">pièces</label>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(get_field('nb_chambres') && get_field('nb_chambres') > 0): ?>
+                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                                <i class="property__features_icon fas fa-bed"></i>
+                                <div>
+                                    <?php the_field('nb_chambres'); ?>
+                                    <label class="property__features_label">chambres</label>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(get_field('nb_bain') && get_field('nb_bain') > 0): ?>
+                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                                <i class="property__features_icon fas fa-bath"></i>
+                                <div>
+                                    <?php the_field('nb_bain'); ?>
+                                    <label class="property__features_label">salles de bain</label>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-        <h2 class="property__subtitle">
+                </div>
+
+                <h2 class="property__subtitle">
             Nos <b>propriétés</b>
             <?php if (get_the_taxonomies() ) : ?>
                 <?php
