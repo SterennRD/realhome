@@ -137,7 +137,9 @@
             <?php $nb = 0; ?>
             <section class="home__team">
                 <div class="container">
-                    <h2 class="home__team_title">Nos <b>agents</b></h2>
+                    <div class="row home__team_title_box">
+                        <h2 class="col-lg-8 home__team_title">Nos <b>agents</b></h2>
+                    </div>
                     <div class="row home__team_container">
                         <div class="home__team_control home__team_control_left">
                             <i class="fas fa-angle-left"></i>

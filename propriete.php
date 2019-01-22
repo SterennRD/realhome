@@ -53,7 +53,7 @@
 
             <!-- // The Loop -->
         <?php if ( $the_query->have_posts() ) : ?>
-            <div class="row test">
+            <div class="row properties__wrapper">
             <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
                 <div class="col-sm-12 col-md-6 col-lg-4">
                     <div class="properties__card">

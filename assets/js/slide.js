@@ -16,22 +16,22 @@ $(document).ready(function () {
 
 
         if ($(this).hasClass(left)) {
-            i--;            console.log(i);
-            item.fadeOut();
-            $('.home__team_item--' + i).fadeIn();
+            i--;
+            console.log(i);
+            item.fadeOut(500);
+            $('.home__team_item--' + i).fadeIn(500);
             if (i < 1) {
-
-                i = 1;
-                $('.home__team_item--' + i).fadeIn();
+                i = nb_team;
+                $('.home__team_item--' + i).fadeIn(500);
             }
         } else {
             i++;            console.log(i);
-            item.fadeOut();
-            $('.home__team_item--' + i).fadeIn();
+            item.fadeOut(500);
+            $('.home__team_item--' + i).fadeIn(500);
             if (i > nb_team) {
-                item.fadeOut();
+                item.fadeOut(500);
                 i = 1;
-                $('.home__team_item--' + i).fadeIn();
+                $('.home__team_item--' + i).fadeIn(500);
             }
         }
     });

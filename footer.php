@@ -17,8 +17,8 @@
                 <?php if(get_field('adresse', 74) && get_field('ville', 74)) :?>
                     <div class="footer__contact_txt footer__contact_address"><?php the_field('adresse', 74); ?>, <?php the_field('ville', 74); ?></div>
                 <?php endif; ?>
-                <?php if(get_field('telephone')) :?>
-                    <div class="footer__contact_txt">Téléphone : <b><?php the_field('telephone'); ?></b></div>
+                <?php if(get_field('telephone', 74)) :?>
+                    <div class="footer__contact_txt">Téléphone : <b><?php the_field('telephone', 74); ?></b></div>
                 <?php endif; ?>
 
                 <?php if(get_field('fax', 74)) :?>

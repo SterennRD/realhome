@@ -31,7 +31,7 @@ $(document).ready(function(){
                     'param': slug
                 },
                 function(response){
-                    $('.test').html(response);
+                    $('.properties__wrapper').html(response);
                 }
             );
         }
