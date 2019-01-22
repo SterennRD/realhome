@@ -5,7 +5,7 @@
             <?php while (have_posts()) : the_post(); ?>
                 <div class="about">
                     <div class="container">
-                        <h1 class="about__title">A <b>propos</b></h1>
+                        <h1 class="about__title">À <b>propos</b></h1>
                         <div class="row about__article">
                             <div class="col-lg-6">
                                 <?php if (get_the_post_thumbnail()) : ?>
