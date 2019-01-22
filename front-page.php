@@ -188,7 +188,7 @@
                 while ( have_rows('partenaires') ) : the_row();
                     $img = get_sub_field('logo'); ?>
                 <div class="partners__logo">
-                    <img src="<?php echo $img['url']; ?>" alt="<?php if(get_sub_field('alt')): the_sub_field('alt'); endif;?>"/>
+                    <img src="<?php echo $img['url']; ?>" alt="<?php if(get_sub_field('alt')): the_sub_field('alt'); endif;?>" title="<?php if(get_sub_field('alt')): the_sub_field('alt'); endif;?>"/>
                 </div>
                 <?php endwhile;
                 echo "</div>";
