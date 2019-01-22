@@ -7,6 +7,7 @@ function insert_css() {
     wp_enqueue_style('style2', get_template_directory_uri() .'/style2.css');
     wp_enqueue_style('fa', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
     wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
+    wp_enqueue_style('light-gallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css');
 
 
 
@@ -19,6 +20,7 @@ function add_js_scripts() {
 
     wp_enqueue_script( 'fa-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js');
     wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js');
+    wp_enqueue_script( 'light-gallery-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery.min.js');
 
 
     // On ajoute le js au thème
@@ -210,4 +212,60 @@ function mytheme_comment($comment, $args, $depth) {
     if ( 'div' != $args['style'] ) : ?>
         </div><?php
     endif;
+}
+
+function get_related_posts( $taxonomy = '', $args = array() )
+{
+    /* On vérifie si le post est un single post */
+    if ( !is_single() )
+        return false;
+
+    /* On vérifie si la taxonomie existe et est valide */
+    if ( !$taxonomy )
+        return false;
+
+    $taxonomy = filter_var( $taxonomy, FILTER_SANITIZE_STRING );
+    if ( !taxonomy_exists( $taxonomy ) )
+        return false;
+
+    /* On récupère l'objet courant pour retrouver le terme de sa taxonomie (id de la ville)
+     */
+    $current_post = get_queried_object();
+    $terms = wp_get_post_terms( $current_post->ID, $taxonomy, array( 'fields' => 'ids') );
+
+    /* On s'arrête ici si on ne trouve aucun terme
+     */
+    if ( !$terms || is_wp_error( $terms ) )
+        return false;
+
+    /*
+     * Nouvelle requête WP
+     */
+    $defaults = array(
+        'post_type' => $current_post->post_type,
+        'post__not_in' => array( $current_post->ID),
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'terms' => $terms,
+                'include_children' => false
+            ),
+        ),
+    );
+
+    /*
+     * Si on on a des arguments array passés dans la fonction, on les passe dans la requête
+     */
+    if ( is_array( $args ) ) {
+        $args = wp_parse_args( $args, $defaults );
+    } else {
+        $args = $defaults;
+    }
+
+    /*
+     * Requête et return du résultat
+     */
+    $q = get_posts( $args );
+
+    return $q;
 }

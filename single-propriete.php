@@ -50,54 +50,75 @@
                     </div>
 
                 </div>
-
-            <?php endwhile; ?>
-        <?php endif; ?>
-
-        <h2 class="property__subtitle">Nos <b>propriétés</b></h2>
-        <?php $Posts = get_the_ID(); ?>
-        <?php
-        $args = array(
-            'post_type' => 'propriete',
-            'posts_per_page' => 4,
-            'order' => 'DESC',
-            'orderby' => 'ID',
-            'posts__not_in' => array($Posts),
-        );
-        ?>
-
-        <?php $the_query = new WP_Query($args);?>
-
-        <?php if ( $the_query->have_posts() ) : ?>
-            <div class="row">
-            <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-            <div class="col-lg-3">
-
-                <?php if (has_post_thumbnail()) : ?>
-                    <div class="property__img property__img--mini">
-                        <img src="<?php the_post_thumbnail_url('large') ?>" />
-                    </div>
-                <?php else: ?>
-                    <div class="property__img property__img--mini property__img--empty"></div>
+                <?php if(get_field('galerie')): ?>
+                    <?php $size = 'medium';$images = get_field('galerie');?>
+                        <div class="property__gallery" id="lightgallery">
+                            <?php foreach( $images as $image ): ?>
+                                    <a href="<?php echo $image['url']; ?>" data-sub-html="<?php echo $image['caption']; ?>">
+                                        <img class="property__gallery_item" src="<?php echo $image['sizes']['thumbnail']; ?>" alt="<?php echo $image['alt']; ?>" />
+                                    </a>
+                            <?php endforeach; ?>
+                        </div>
                 <?php endif; ?>
 
-                <h3 class="property__mini_title"><?php the_title(); ?></h3>
 
-                <?php if (get_the_taxonomies() ) : ?>
-                    <?php
-                    $id = get_the_ID();
-                    $terms = get_the_terms( $id, 'ville' );
-                    if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-                        foreach ( $terms as $term ) {
-                            $term_link = get_term_link( $term, 'ville' );
-                            echo '<a class="property__mini_link" href="' . $term_link . '">' . $term->name . '</a>';
-                        }
+        <h2 class="property__subtitle">
+            Nos <b>propriétés</b>
+            <?php if (get_the_taxonomies() ) : ?>
+                <?php
+                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                    foreach ( $terms as $term ) {
+                        echo 'à ' . $term->name;
                     }
-                    ?>
-                <?php endif ?>
-            </div>
+                }
+                ?>
+            <?php endif ?>
+        </h2>
             <?php endwhile; ?>
-            </div>
         <?php endif; ?>
+
+        <?php if ( function_exists( 'get_related_posts' ) ) {
+            $related_posts = get_related_posts( 'ville', array( 'posts_per_page' => 4) );
+            if ( $related_posts ) {
+                echo "<div class='row'>";
+                foreach ( $related_posts as $post ) {
+                    setup_postdata( $post ); ?>
+
+                    <div class="col-lg-3">
+                        <a class="d- flex-column" href="<?php the_permalink(); ?>">
+
+                            <?php if (has_post_thumbnail()) : ?>
+                                <div class="property__img property__img--mini">
+                                    <img src="<?php the_post_thumbnail_url('large') ?>" />
+                                </div>
+                            <?php else: ?>
+                                <div class="property__img property__img--mini property__img--empty"></div>
+                            <?php endif; ?>
+
+                            <h3 class="property__mini_title"><?php the_title(); ?></h3>
+
+                            <?php if (get_the_taxonomies() ) : ?>
+                                <?php
+                                $id = get_the_ID();
+                                $terms = get_the_terms( $id, 'ville' );
+                                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                                    foreach ( $terms as $term ) {
+                                        $term_link = get_term_link( $term, 'ville' );
+                                        echo '<a class="property__mini_link" href="' . $term_link . '">' . $term->name . '</a>';
+                                    }
+                                }
+                                ?>
+                            <?php endif ?>
+
+                        </a>
+                    </div>
+                <?php
+                }
+                echo "</div>";
+                wp_reset_postdata();
+            }
+        }
+        ?>
+
     </div>
 <?php get_footer(); ?>
