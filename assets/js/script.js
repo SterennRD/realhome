@@ -17,6 +17,7 @@ $(document).ready(function(){
 
     $('.filter__link').on('click', function(el) {
         el.preventDefault();
+        console.log("toto");
         $(this).siblings().removeClass('filter__link--active');
         if ($(this).hasClass("filter__link--active")) {
 

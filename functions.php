@@ -110,7 +110,10 @@ add_action( 'wp_ajax_filter_city', 'filter_city' );
 add_action( 'wp_ajax_nopriv_filter_city', 'filter_city' );
 
 function filter_city() {
+    /* On récupère le paramètre en post */
     $keyword = $_POST['param'];
+
+    /* Si on a effectivement un paramètre en post, on construit les arguments de la requête */
     if ($_POST['param']) {
         $args = array(
             'post_type' => 'propriete',
@@ -125,6 +128,7 @@ function filter_city() {
                 )
             ),
         );
+        /* Sinon, on construit une requête de base sans le paramètre */
     } else {
         $args = array(
             'post_type' => 'propriete',
@@ -134,8 +138,10 @@ function filter_city() {
         );
     }
 
+    /* On effectue la requête */
     $ajax_query = new WP_Query($args);
 
+    /* Si la requête trouve des posts, on injecte les données dans le morceau de template 'propriete-card' */
     if ( $ajax_query->have_posts() ) : while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
         get_template_part( 'propriete-card' );
     endwhile;
