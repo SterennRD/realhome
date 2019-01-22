@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700,800|Playfair+Display');
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,800|Playfair+Display');
 body {
   margin: 0;
   min-height: 100vh;
@@ -399,9 +399,11 @@ p {
     font-size: 24px;
     height: 45px;
     justify-content: center;
+    letter-spacing: 0px;
     margin-bottom: 20px;
     position: relative;
     text-transform: uppercase;
+    transition: 0.3s;
     width: 170px;
     &::after {
       border-right: 1px inset #acacac;
@@ -448,6 +450,10 @@ p {
         position: absolute;
         width: 10px;
       }
+    }
+    &:hover {
+      color: #fff;
+      letter-spacing: 2px;
     }
   }
   &__menu {
@@ -512,7 +518,8 @@ p {
   }
   &__title {
     color: #fff;
-    font-size: 20px;
+    font-size: 25px;
+    font-weight: 300;
   }
   &__contact {
     color: #fff;
