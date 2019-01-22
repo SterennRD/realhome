@@ -37,6 +37,11 @@ $(document).ready(function(){
         }
 
     });
+
+    $('.header__trigger').click(function() {
+        $(this).toggleClass("header__trigger--active");
+        $(this).next('.header__menu--mobile').slideToggle();
+    });
 });
 
 

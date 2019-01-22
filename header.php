@@ -16,8 +16,23 @@
                 <a href="<?php echo bloginfo('url'); ?>" class="header__logo">
                     Real<b>Home</b><span></span>
                 </a>
-                <?php wp_nav_menu(array( 'theme_location' => 'menu-principal','container' => 'nav', 'container_class' => 'header__menu')); ?>
-                <?php wp_nav_menu(array( 'theme_location' => 'menu-secondaire','container' => 'nav', 'container_class' => 'header__menu_rs')); ?>
+                <?php wp_nav_menu(array(
+                        'theme_location' => 'menu-principal',
+                    'container' => 'nav',
+                    'container_class' => 'header__menu d-none d-lg-block'
+                )); ?>
+
+                <?php wp_nav_menu(array(
+                        'theme_location' => 'menu-secondaire',
+                    'container' => 'nav',
+                    'container_class' => 'header__menu_rs'
+                )); ?>
+                <div class="header__trigger d-flex d-lg-none"><span></span></div>
+                <?php wp_nav_menu(array(
+                    'theme_location' => 'menu-principal',
+                    'container' => 'nav',
+                    'container_class' => 'header__menu header__menu--mobile',
+                )); ?>
             </div>
 
         </header>

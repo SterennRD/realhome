@@ -48,14 +48,15 @@ p {
     align-items: center;
     color: #3c3c3c;
     display: flex;
-    font-size: 24px;
-    height: 45px;
+    font-size: 15px;
+    height: 35px;
     justify-content: center;
     letter-spacing: 0px;
+    margin-right: auto;
     position: relative;
     text-transform: uppercase;
     transition: 0.3s;
-    width: 170px;
+    width: 100px;
     &:hover {
       color: #cacaca;
       letter-spacing: 2px;
@@ -109,7 +110,6 @@ p {
   }
   &__menu {
     height: 100%;
-    margin-left: auto;
     ul {
       display: flex;
       height: 100%;
@@ -134,6 +134,18 @@ p {
         background-color: #f2f2f2;
       }
     }
+    &--mobile {
+      background-color: #fff;
+      display: none;
+      height: auto;
+      left: 0;
+      position: absolute;
+      top: 90px;
+      width: 100%;
+      ul {
+        flex-direction: column;
+      }
+    }
   }
   &__menu_rs {
     ul {
@@ -148,15 +160,15 @@ p {
         color: #3c3c3c;
         display: flex;
         font-size: 0;
-        height: 36px;
+        height: 30px;
         justify-content: center;
         margin-left: 10px;
         transition: 0.3s;
-        width: 36px;
+        width: 30px;
         &::before {
           display: inline-block;
           font-family: "Font Awesome 5 Brands";
-          font-size: 18px;
+          font-size: 15px;
           font-style: normal;
           font-variant: normal;
           font-weight: 400;
@@ -175,6 +187,67 @@ p {
       }
       .pinterest a::before {
         content: '\f231';
+      }
+    }
+  }
+  &__trigger {
+    align-items: center;
+    height: 36px;
+    margin-left: 10px;
+    width: 36px;
+    span {
+      background-color: #d3d3d3;
+      border-radius: 4px;
+      height: 4px;
+      position: relative;
+      transition: 0.3s;
+      width: 100%;
+      &::after,
+      &::before {
+        background-color: #d3d3d3;
+        border-radius: 4px;
+        content: '';
+        height: 4px;
+        position: absolute;
+        transition: 0.3s;
+        width: 100%;
+      }
+      &::after {
+        top: -10px;
+      }
+      &::before {
+        bottom: -10px;
+      }
+    }
+    &--active {
+      span {
+        transform: rotate(-45deg);
+        &::after,
+        &::before {
+          bottom: initial;
+          top: initial;
+          transform: rotate(90deg);
+        }
+      }
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .header {
+    &__logo {
+      font-size: 24px;
+      height: 45px;
+      width: 170px;
+    }
+  }
+  &__menu_rs {
+    ul {
+      a {
+        height: 36px;
+        width: 36px;
+        &::before {
+          font-size: 18px;
+        }
       }
     }
   }
