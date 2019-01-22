@@ -721,7 +721,7 @@ p {
       }
     }
     img {
-      max-height: 100%;
+      width: 100%;
     }
   }
   &__desc {
@@ -762,6 +762,16 @@ p {
     div {
       margin-left: 5px;
       margin-right: 5px;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .properties {
+    &__img {
+      img {
+        max-height: 100%;
+        width: auto;
+      }
     }
   }
 }
