@@ -817,6 +817,7 @@ p {
     }
   }
   &__img {
+    margin-bottom: 10px;
     img {
       border-radius: 3px;
       max-width: 100%;
@@ -885,6 +886,7 @@ p {
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 30px;
+      margin-top: 15px;
       position: relative;
       text-transform: uppercase;
       &::after {
@@ -916,6 +918,13 @@ p {
       color: #797979;
       font-family: 'Playfair Display', serif;
       font-size: 13px;
+    }
+  }
+}
+@media screen and (min-width: 940px) {
+  .property {
+    &__img {
+      margin-bottom: 0;
     }
   }
 }

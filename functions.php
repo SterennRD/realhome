@@ -103,6 +103,20 @@ function themes_taxonomy() {
             'show_in_rest' => true,
         )
     );
+    register_taxonomy(
+        'plus',
+        'propriete', // nom du custom type
+        array(
+            'label' => 'Les plus', // Nom de la taxonomie (dans le back)
+            'query_var' => true, // Pouvoir faire des requêtes
+            'rewrite' => array(
+                'slug' => 'plus',
+                'with_front' => true
+            ),
+            'hierarchical' => true, // pour créer des catégories et non pas des étiquettes
+            'show_in_rest' => true,
+        )
+    );
 }
 add_action( 'init', 'themes_taxonomy');
 

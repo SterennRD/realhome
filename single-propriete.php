@@ -68,7 +68,7 @@
                     <h3 class="property__features_title">À l'intérieur</h3>
                     <div class="row">
                         <?php if(get_field('nb_pieces') && get_field('nb_pieces') > 0): ?>
-                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                            <div class="property__features_item col-sm-2 col-md-3 col-lg-2 d-flex flex-column">
                                 <i class="property__features_icon fas fa-door-closed"></i>
                                 <div>
                                     <?php the_field('nb_pieces'); ?>
@@ -77,7 +77,7 @@
                             </div>
                         <?php endif; ?>
                         <?php if(get_field('nb_chambres') && get_field('nb_chambres') > 0): ?>
-                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                            <div class="property__features_item col-sm-2 col-md-3 col-lg-2 d-flex flex-column">
                                 <i class="property__features_icon fas fa-bed"></i>
                                 <div>
                                     <?php the_field('nb_chambres'); ?>
@@ -86,7 +86,7 @@
                             </div>
                         <?php endif; ?>
                         <?php if(get_field('nb_bain') && get_field('nb_bain') > 0): ?>
-                            <div class="property__features_item col-lg-2 d-flex flex-column">
+                            <div class="property__features_item col-sm-2 col-md-3 col-lg-2 d-flex flex-column">
                                 <i class="property__features_icon fas fa-bath"></i>
                                 <div>
                                     <?php the_field('nb_bain'); ?>
@@ -94,6 +94,21 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                    </div>
+
+                    <h3 class="property__features_title">Les plus</h3>
+                    <div class="row">
+                        <?php if (get_the_taxonomies() ) : ?>
+                            <?php
+                            $terms_plus = get_the_terms( $id, 'plus' );
+                            if ( ! empty( $terms_plus ) && ! is_wp_error( $terms_plus ) ){
+                                foreach ( $terms_plus as $term ) {
+                                    $term_link = get_term_link( $term, 'plus' );
+                                    echo '<div class="property__features_item col-sm-2 col-md-3 col-lg-2 d-flex flex-column"><i class="property__features_icon fas fa-'. $term->slug .'"></i>' . $term->name . '</div>';
+                                }
+                            }
+                            ?>
+                        <?php endif ?>
                     </div>
 
                 </div>
