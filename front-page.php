@@ -1,8 +1,7 @@
 <?php get_header(); ?>
 
 <!--    BANNIERE-->
-    <section class="banner">
-        <img src="<?php the_post_thumbnail_url(); ?>" class="banner__img"/>
+    <section class="banner" style="<?php if (has_post_thumbnail()) : ?>background-image: url(<?php the_post_thumbnail_url(); ?>);<?php endif; ?>">
         <div class="container">
             <h1 class="banner__title"><?php the_title(); ?></h1>
         </div>
@@ -138,27 +137,29 @@
             <section class="home__team">
                 <div class="container">
                     <div class="row home__team_title_box">
-                        <h2 class="col-lg-8 home__team_title">Nos <b>agents</b></h2>
+                        <h2 class="col-md-9 col-lg-8 home__team_title">Nos <b>agents</b></h2>
                     </div>
                     <div class="row home__team_container">
-                        <div class="home__team_control home__team_control_left">
-                            <i class="fas fa-angle-left"></i>
-                        </div>
-                        <div class="home__team_control home__team_control_right">
-                            <i class="fas fa-angle-right"></i>
+                        <div class="home__team_controls">
+                            <div class="home__team_control home__team_control_left">
+                                <i class="fas fa-angle-left"></i>
+                            </div>
+                            <div class="home__team_control home__team_control_right">
+                                <i class="fas fa-angle-right"></i>
+                            </div>
                         </div>
                         <div class="home__team_wrapper">
                             <div class="home__team_content">
                                 <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
                                     <?php $nb++; ?>
                                     <div class="home__team_item home__team_item--<?php echo $nb; ?> row m-0 p-0">
-                                        <div class="col-lg-4">
+                                        <div class="col-md-3 col-lg-4">
                                             <?php if (has_post_thumbnail()) : ?>
                                                 <img class="home__team_img" src="<?php the_post_thumbnail_url('large') ?>" />
                                             <?php endif; ?>
                                         </div>
 
-                                        <div class="col-lg-8 home__team_right">
+                                        <div class="col-md-9 col-lg-8 home__team_right">
                                             <h3 class="home__team_name"><?php the_title(); ?></h3>
                                             <?php if (get_field('texte-team')) : ?>
                                                 <?php $texte = strip_tags(get_field('texte-team')); ?>
@@ -186,7 +187,9 @@
                 echo "<div class='container partners'><h2 class='partners__title'>Our <b>partners</b></h2>";
                 while ( have_rows('partenaires') ) : the_row();
                     $img = get_sub_field('logo'); ?>
-                    <img src="<?php echo $img['url']; ?>" class="partners__logo" alt="<?php if(get_sub_field('logo')): the_sub_field('alt'); endif;?>"/>
+                <div class="partners__logo">
+                    <img src="<?php echo $img['url']; ?>" alt="<?php if(get_sub_field('alt')): the_sub_field('alt'); endif;?>"/>
+                </div>
                 <?php endwhile;
                 echo "</div>";
             endif;

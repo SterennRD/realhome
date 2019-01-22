@@ -183,23 +183,20 @@ p {
 // BANNIERE PAGE D'ACCUEIL
 .banner {
   align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
   height: calc(100vh - 90px);
   justify-content: center;
   overflow: hidden;
   position: relative;
-  &__img {
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
   &__title {
     color: #fff;
     font-weight: 700;
     padding: 0 15px;
     position: relative;
     text-align: center;
+    text-shadow: 0 0 5px #525252;
     text-transform: uppercase;
   }
 }
@@ -207,12 +204,12 @@ p {
 // PAGE D'ACCUEIL
 .home {
   &__article {
-    padding-bottom: 120px;
-    padding-top: 120px;
+    padding-bottom: 80px;
+    padding-top: 80px;
     &__title {
       align-self: flex-start;
       color: #3c3c3c;
-      margin: 0;
+      margin: 0 0 50px;
       text-align: right;
       &::after {
         background: #3c3c3c;
@@ -255,7 +252,6 @@ p {
     &_txt {
       margin: 0 auto 50px;
       text-align: center;
-      width: 50%;
     }
     &_button {
       padding: 15px 40px;
@@ -267,11 +263,7 @@ p {
     & > .container {
       position: relative;
     }
-    &_title_box {
-      position: absolute;
-      top: 200px;
-      width: 100%;
-    }
+
     &_title {
       color: #3c3c3c;
       font-size: 30px;
@@ -293,25 +285,24 @@ p {
       }
     }
     &_container {
-      height: 500px;
       position: relative;
+    }
+    &_controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
     }
     &_control {
       color: #cacaca;
       cursor: pointer;
       font-size: 40px;
-      position: absolute;
-      top: 50%;
       transition: 0.3s;
       z-index: 10;
       &:hover {
         color: #3c3c3c;
       }
       &_left {
-        left: -40px;
-      }
-      &_right {
-        right: -40px;
+        margin-right: 20px;
       }
     }
     &_wrapper {
@@ -339,7 +330,7 @@ p {
       font-size: 25px;
       font-weight: bold;
       margin-bottom: 10px;
-      margin-top: 300px;
+      margin-top: 10px;
     }
     &_txt {
       flex: 1;
@@ -347,15 +338,65 @@ p {
     }
   }
 }
-
+@media screen and (min-width: 768px) {
+  .home {
+    &__article {
+      padding-bottom: 120px;
+      padding-top: 120px;
+      &__title {
+        margin-bottom: 0;
+      }
+    }
+    &__proprietes {
+      &_txt {
+        width: 50%;
+      }
+    }
+    &__team {
+      padding-bottom: 60px;
+      padding-top: 60px;
+      &_title_box {
+        position: absolute;
+        width: 100%;
+      }
+      &_controls {
+        left: -20px;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        width: calc(100% + 40px);
+      }
+      &_name {
+        margin-top: 100px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 940px) {
+  .home {
+    &__team {
+      &_title_box {
+        top: 200px;
+      }
+      &_container {
+        height: 500px;
+      }
+      &_name {
+        margin-top: 300px;
+      }
+    }
+  }
+}
 
 // FEATURES PAGE D'ACCUEIL
 .features {
   background-color: #fafafa;
   color: #3c3c3c;
-  padding: 100px 0;
+  padding-bottom: 85px;
+  padding-top: 100px;
   &__block {
     text-align: center;
+    margin-bottom: 15px;
   }
   &__title {
     font-size: 20px;
@@ -375,15 +416,40 @@ p {
 .partners {
   align-items: center;
   display: flex;
-  padding-bottom: 100px;
-  padding-top: 100px;
+  flex-wrap: wrap;
+  padding-bottom: 50px;
+  padding-top: 50px;
   &__title {
-    margin-bottom: 0;
+    flex: 100%;
+    margin-bottom: 10px;
     margin-right: auto;
     margin-top: 0;
+    white-space: nowrap;
   }
   &__logo {
-    margin-left: 50px;
+    width: 50%;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .partners {
+    padding-bottom: 100px;
+    padding-top: 100px;
+    &__logo {
+      width: auto;
+      margin-right: 50px;
+    }
+  }
+}
+@media screen and (min-width: 940px) {
+  .partners {
+    flex-wrap: nowrap;
+    &__title {
+      flex: 1;
+      margin-bottom: 0;
+    }
   }
 }
 
