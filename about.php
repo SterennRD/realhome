@@ -7,12 +7,12 @@
                     <div class="container">
                         <h1 class="about__title">À <b>propos</b></h1>
                         <div class="row about__article">
-                            <div class="col-lg-6">
+                            <div class="col-md-6 col-lg-6 mb-4">
                                 <?php if (get_the_post_thumbnail()) : ?>
                                     <img class="about__img" src="<?php the_post_thumbnail_url('large'); ?>" />
                                 <?php endif; ?>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-md-6 col-lg-6">
                                 <?php the_content(); ?>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
                         <?php if ( $the_query->have_posts() ) : ?>
                             <div class="row">
                             <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
-                            <div class="col-lg-3">
+                            <div class="col-md-4 col-lg-3">
                                 <div class="team">
                                     <div class="team__img<?php if(!get_the_post_thumbnail()) : ?> team__img--empty<?php endif; ?>">
                                         <?php if(get_the_post_thumbnail()) : ?>
