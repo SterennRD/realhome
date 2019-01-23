@@ -62,9 +62,80 @@
                 <?php endif; ?>
 
                 <div class="property__features">
-                    <?php if(get_field('m2')): ?>
-                        <?php the_field('m2'); ?>m²
-                    <?php endif; ?>
+                    <div class="row">
+                        <?php if(get_field('m2')): ?>
+                            <div class="property__features_m2 col-2"><?php the_field('m2'); ?>m²</div>
+                        <?php endif; ?>
+                        <?php if(get_field('dpe')): ?>
+                            <div class="col-sm-12 col-lg-8">
+                                <b>DPE (Diagnostic de Performance Energétique)</b>
+                                <div class="property__features_dpe d-flex">
+                                <div class="property__features_dpe_schema d-flex flex-column">
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        <= 50 <div>A</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        51 à 90<div>B</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        91 à 150<div>C</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        151 à 230 <div>D</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        231 à 330 <div>E</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        331 à 450 <div>F</div>
+                                    </span>
+                                    <span class="d-flex align-items-center justify-content-between px-2">
+                                        > 451 <div>G</div>
+                                    </span>
+                                </div>
+                                <?php
+                                $dpe = get_field('dpe');
+                                switch ($dpe) {
+                                    case $dpe <= 50 :
+                                        $letter = "A";
+                                        $top = 0;
+                                        break;
+                                    case $dpe < 90 :
+                                        $letter = "B";
+                                        $top = 20;
+                                        break;
+                                    case $dpe < 150 :
+                                        $letter = "C";
+                                        $top = 40;
+                                        break;
+                                    case $dpe < 230 :
+                                        $letter = "D";
+                                        $top = 60;
+                                        break;
+                                    case $dpe < 330 :
+                                        $letter = "E";
+                                        $top = 80;
+                                        break;
+                                    case $dpe < 450 :
+                                        $letter = "F";
+                                        $top = 100;
+                                        break;
+                                    case $dpe > 450 :
+                                        $letter = "G";
+                                        $top = 120;
+                                        break;
+                                }
+
+                                    ?>
+                                <div>
+                                    <div class="property__features_dpe_letter"><?php echo $letter; ?></div>
+                                    <div class="property__features_dpe_indice" style="top: <?php echo $top; ?>px;"><?php the_field('dpe'); ?></div>
+                                </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
                     <h3 class="property__features_title">À l'intérieur</h3>
                     <div class="d-flex flex-wrap">
                         <?php if(get_field('nb_pieces') && get_field('nb_pieces') > 0): ?>
@@ -96,20 +167,21 @@
                         <?php endif; ?>
                     </div>
 
-                    <h3 class="property__features_title">Les plus</h3>
-                    <div class="d-flex flex-wrap">
+
                         <?php if (get_the_taxonomies() ) : ?>
                             <?php
                             $terms_plus = get_the_terms( $id, 'plus' );
                             if ( ! empty( $terms_plus ) && ! is_wp_error( $terms_plus ) ){
+                                echo '<h3 class="property__features_title">Les plus</h3>';
+                                echo '<div class="d-flex flex-wrap">';
                                 foreach ( $terms_plus as $term ) {
                                     $term_link = get_term_link( $term, 'plus' );
                                     echo '<div class="property__features_item mr-5 d-flex flex-column"><i class="property__features_icon fas fa-'. $term->slug .'"></i>' . $term->name . '</div>';
                                 }
+                                echo '</div>';
                             }
                             ?>
                         <?php endif ?>
-                    </div>
 
                 </div>
 

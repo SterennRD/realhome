@@ -102,6 +102,87 @@
         width: 30px;
       }
     }
+    &_m2 {
+      font-size: 50px;
+    }
+    &_dpe {
+      position: relative;
+      width: 180px;
+      &_schema {
+        margin-right: 30px;
+        width: 150px;
+        span {
+          background-color: green;
+          color: #fff;
+          font-size: 11px;
+          font-weight: 600;
+          height: 20px;
+          position: relative;
+          &::after {
+            content: "";
+            border-color: transparent transparent transparent #007bff;
+            border-style: solid;
+            border-width: 10px 0 10px 5px;
+            height: 0;
+            position: absolute;
+            right: -5px;
+            width: 0;
+          }
+          &:nth-child(1) {
+            background-color: #00872f;
+            width: calc(100% - 60px);
+          }
+          &:nth-child(2) {
+            background-color: #48a820;
+            width: calc(100% - 50px);
+          }
+          &:nth-child(3) {
+            background-color: #b0d811;
+            width: calc(100% - 40px);
+          }
+          &:nth-child(4) {
+            background-color: #f8f800;
+            width: calc(100% - 30px);
+          }
+          &:nth-child(5) {
+            background-color: #f8b000;
+            width: calc(100% - 20px);
+          }
+          &:nth-child(6) {
+            background-color: #f84800;
+            width: calc(100% - 10px);
+          }
+          &:nth-child(7) {
+            background-color: #f80000;
+            width: 100%;
+          }
+        }
+      }
+      &_letter {
+        font-size: 50px;
+        position: absolute;
+        right: 10px;
+        top: 0;
+      }
+      &_indice {
+        background: #ccc;
+        font-size: 10px;
+        height: 20px;
+        line-height: 20px;
+        padding: 0 5px;
+        position: absolute;
+        &::after {
+          content: "";
+          border-color: transparent #ccc transparent transparent;
+          border-style: solid;
+          border-width: 10px 5px 10px 0;
+          height: 0;
+          left: -5px;
+          position: absolute;
+          width: 0;
+        }
+      }
+    }
     &_icon {
       color: #d0d0d0;
       font-size: 35px;
