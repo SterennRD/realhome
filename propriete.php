@@ -48,7 +48,7 @@
         }
         $args = array(
             'post_type' => 'propriete',
-            'posts_per_page' => 3,
+            'posts_per_page' => 2,
             'order' => 'DESC',
             'order by' => 'ID',
             'paged' => $paged,
@@ -70,7 +70,7 @@
             <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
                 <?php get_template_part( 'propriete-card' ); ?>
             <?php endwhile; ?>
-                <div id="load-more">
+                <div id="pagination" class="col-12 d-flex align-items-center justify-content-center">
                         <?php
                         $big = 999999999; // need an unlikely integer
 

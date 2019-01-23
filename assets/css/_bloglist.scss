@@ -1,0 +1,55 @@
+// LISTE DES ACTUALITES
+.actualites {
+  padding-bottom: 100px;
+  padding-top: 100px;
+  &__title {
+    font-weight: 800;
+    margin-bottom: 120px;
+    text-align: center;
+  }
+  &__item {
+    &__title {
+      margin-bottom: 40px;
+      a {
+        color: #3c3c3c;
+      }
+    }
+    p {
+      color: #797979;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      line-height: 1.7em;
+    }
+    &:last-child {
+      .actualites__sep {
+        display: none;
+      }
+    }
+  }
+  &__img {
+    border-radius: 5px;
+    margin-bottom: 30px;
+    max-width: 100%;
+  }
+  &__more {
+    background-color: #e2574c;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    &:hover {
+      background-color: #cc4a40;
+      color: #fff;
+    }
+  }
+  &__sep {
+    border: 0;
+    border-top: 1px solid #f0f4f5;
+    margin: 50px 0;
+  }
+}

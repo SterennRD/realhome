@@ -1,0 +1,272 @@
+// BANNIERE PAGE D'ACCUEIL
+.banner {
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  height: calc(100vh - 90px);
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  &__title {
+    color: #fff;
+    font-weight: 700;
+    padding: 0 15px;
+    position: relative;
+    text-align: center;
+    text-shadow: 0 0 5px #525252;
+    text-transform: uppercase;
+  }
+}
+
+// PAGE D'ACCUEIL
+.home {
+  &__article {
+    padding-bottom: 80px;
+    padding-top: 80px;
+    &__title {
+      align-self: flex-start;
+      color: #3c3c3c;
+      margin: 0 0 50px;
+      text-align: right;
+      &::after {
+        background: #3c3c3c;
+        bottom: -20px;
+        content: "";
+        height: 2px;
+        position: absolute;
+        right: 15px;
+        width: 30px;
+      }
+    }
+    p {
+      color: #797979;
+      font-family: 'Playfair Display', serif;
+      font-size: 14px;
+      line-height: 1.7em;
+    }
+  }
+  &__proprietes {
+    background-color: #f6f6f6;
+    padding-bottom: 100px;
+    padding-top: 100px;
+    &_title {
+      color: #3c3c3c;
+      font-size: 30px;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 70px;
+      position: relative;
+      &::after {
+        background-color: #e2574c;
+        bottom: -30px;
+        content: "";
+        height: 3px;
+        position: absolute;
+        left: calc(50% - 50px);
+        width: 100px;
+      }
+    }
+    &_txt {
+      margin: 0 auto 50px;
+      text-align: center;
+    }
+    &_button {
+      padding: 15px 40px;
+    }
+  }
+  &__team {
+    padding-bottom: 60px;
+    padding-top: 60px;
+    & > .container {
+      position: relative;
+    }
+
+    &_title {
+      color: #3c3c3c;
+      font-size: 30px;
+      font-weight: 500;
+      margin-bottom: 70px;
+      margin-left: auto;
+      position: relative;
+      b {
+        font-weight: 800;
+      }
+      &::after {
+        background-color: #e2574c;
+        bottom: -30px;
+        content: "";
+        height: 3px;
+        position: absolute;
+        left: 15px;
+        width: 100px;
+      }
+    }
+    &_container {
+      position: relative;
+    }
+    &_controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+    &_control {
+      color: #cacaca;
+      cursor: pointer;
+      font-size: 40px;
+      transition: 0.3s;
+      z-index: 10;
+      &:hover {
+        color: #3c3c3c;
+      }
+      &_left {
+        margin-right: 20px;
+      }
+    }
+    &_wrapper {
+      overflow: hidden;
+    }
+    &_content {
+      display: flex;
+      flex-wrap: nowrap;
+
+    }
+    &_item {
+      height: 100%;
+      min-width: 100%;
+      overflow: hidden;
+    }
+    &_img {
+      width: 100%;
+    }
+    &_right {
+      display: flex;
+      flex-direction: column;
+    }
+    &_name {
+      font-family: 'Playfair Display', serif;
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+    &_txt {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .home {
+    &__article {
+      padding-bottom: 120px;
+      padding-top: 120px;
+      &__title {
+        margin-bottom: 0;
+      }
+    }
+    &__proprietes {
+      &_txt {
+        width: 50%;
+      }
+    }
+    &__team {
+      padding-bottom: 60px;
+      padding-top: 60px;
+      &_title_box {
+        position: absolute;
+        width: 100%;
+      }
+      &_controls {
+        left: -20px;
+        padding: 0;
+        position: absolute;
+        top: 50%;
+        width: calc(100% + 40px);
+      }
+      &_name {
+        margin-top: 100px;
+      }
+    }
+  }
+}
+@media screen and (min-width: 940px) {
+  .home {
+    &__team {
+      &_title_box {
+        top: 200px;
+      }
+      &_container {
+        height: 500px;
+      }
+      &_name {
+        margin-top: 300px;
+      }
+    }
+  }
+}
+
+// FEATURES PAGE D'ACCUEIL
+.features {
+  background-color: #fafafa;
+  color: #3c3c3c;
+  padding-bottom: 85px;
+  padding-top: 100px;
+  &__block {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  &__title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+  &__txt {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+    font-size: 12px;
+    line-height: 1.7em;
+    margin-bottom: 0;
+  }
+}
+
+// PARTENAIRES PAGE D'ACCUEIL
+.partners {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 50px;
+  padding-top: 50px;
+  &__title {
+    flex: 100%;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-top: 0;
+    white-space: nowrap;
+  }
+  &__logo {
+    width: 50%;
+    img {
+      max-width: 100%;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .partners {
+    padding-bottom: 100px;
+    padding-top: 100px;
+    &__logo {
+      width: auto;
+      margin-right: 50px;
+    }
+  }
+}
+@media screen and (min-width: 940px) {
+  .partners {
+    flex-wrap: nowrap;
+    &__title {
+      flex: 1;
+      margin-bottom: 0;
+    }
+  }
+}

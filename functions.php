@@ -153,7 +153,7 @@ function filter_city() {
             'order by' => 'rand',
         );
     }
-    if ($_POST['param']) {
+    if ($_POST['offset']) {
         $args = wp_parse_args($args, array('offset' => $offset));
     }
 
@@ -166,15 +166,23 @@ function filter_city() {
         get_template_part( 'propriete-card' );
     endwhile;
     endif;
+    //echo '<div id="load-more" slug="'.$keyword.'">Load more</div>';
 
-    echo '<div id="load-more">';
+    echo '<div id="pagination" class="col-12 d-flex align-items-center justify-content-center">';
     $big = 999999999;
+    if ($_POST['param']) {
+        $base = get_bloginfo('url'). '/ville/' . $keyword .'/page/%#%';
+    } else {
+        $base = get_bloginfo('url'). '/proprietes/page/%#%';
+    }
     echo paginate_links( array(
-            'base' => 'http://localhost/dcdev/wordpress/realhome/proprietes/page/%#%',
-                            'format' => '?paged=%#%',
-                            'current' => max( 1, get_query_var('paged') ),
-                            'total' => $ajax_query->max_num_pages
-                        ) );
+
+        'base' => $base,
+        //'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+        'format' => '?paged=%#%',
+        'current' => max( 1, get_query_var('paged') ),
+        'total' => $ajax_query->max_num_pages
+    ) );
 
     echo '</div>';
 
@@ -306,3 +314,12 @@ function get_related_posts( $taxonomy = '', $args = array() )
 
     return $q;
 }
+
+function taxonomy_rewrite_fix($wp_rewrite) {
+    $r = array();
+    foreach($wp_rewrite->rules as $k=>$v){
+        $r[$k] = str_replace('ville=$matches[1]&paged=','ville=$matches[1]&page=',$v);
+    }
+    $wp_rewrite->rules = $r;
+}
+add_filter('generate_rewrite_rules', 'taxonomy_rewrite_fix');

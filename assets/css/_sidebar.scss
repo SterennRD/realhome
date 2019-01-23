@@ -1,0 +1,45 @@
+// SIDEBAR
+.sidebar {
+  padding-top: 40px;
+  &__widget {
+    margin-bottom: 40px;
+  }
+  &__title {
+    color: #3c3c3c;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .cat-item {
+    a {
+      color: #797979;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}
+.rpwe-li {
+  display: flex;
+  flex-direction: column;
+  .rpwe-title {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    a {
+      color: #3c3c3c;
+    }
+  }
+  .rpwe-time {
+    font-size: 12px;
+    font-weight: bold;
+    order: 1;
+  }
+  .rpwe-summary,
+  .rpwe-time {
+    color: #797979;
+    font-family: 'Playfair Display', serif;
+  }
+}

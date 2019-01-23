@@ -1,0 +1,15 @@
+#pagination {
+  width: 100%;
+  .page-numbers {
+    background-color: #cccccc;
+    border-radius: 3px;
+    color: #fff;
+    margin: 0 5px;
+    padding: 0 8px;
+    transition: 0.3s;
+    &:hover,
+    &.current {
+      background-color: #3c3c3c;
+    }
+  }
+}
