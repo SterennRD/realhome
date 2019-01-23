@@ -23,7 +23,7 @@
                         echo "<div class='features'><div class='container'><div class='row'>";
                         while ( have_rows('features', 13) ) : the_row(); ?>
                             <div class="features__block col-sm-12 col-md-6 col-lg-3">
-                                <div class="dashicons <?php the_sub_field('icon'); ?> features__icon"></div>
+                                <div class="fas fa-<?php the_sub_field('icon'); ?> features__icon"></div>
                                 <h3 class="features__title"><?php the_sub_field('titre-features'); ?></h3>
                                 <?php
                                 $features_txt = get_sub_field('texte-features');
