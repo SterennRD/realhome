@@ -38,27 +38,52 @@
         ?>
 
             <!-- // Les arguments  -->
-        <?php $Posts = get_the_ID(); ?>
         <?php
+        if ( get_query_var('paged') ) {
+            $paged = get_query_var('paged');
+        } elseif ( get_query_var('page') ) { // 'page' is used instead of 'paged' on Static Front Page
+            $paged = get_query_var('page');
+        } else {
+            $paged = 1;
+        }
         $args = array(
             'post_type' => 'propriete',
-            'posts_per_page' => 10,
+            'posts_per_page' => 3,
             'order' => 'DESC',
-            'order by' => 'rand',
-            'posts__not_in' => array($Posts),
+            'order by' => 'ID',
+            'paged' => $paged,
+
         );
+
+
+        $custom_query = new WP_Query( $args );
+
+
+
         ?>
 
-            <!-- // The Query -->
-        <?php $the_query = new WP_Query($args);?>
+
 
             <!-- // The Loop -->
-        <?php if ( $the_query->have_posts() ) : ?>
+        <?php if ( $custom_query->have_posts() ) : ?>
             <div class="row properties__wrapper">
-            <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+            <?php while ( $custom_query->have_posts() ) : $custom_query->the_post(); ?>
                 <?php get_template_part( 'propriete-card' ); ?>
             <?php endwhile; ?>
+                <div id="load-more">
+                        <?php
+                        $big = 999999999; // need an unlikely integer
+
+                        echo paginate_links( array(
+                            'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
+                            'format' => '?paged=%#%',
+                            'current' => max( 1, get_query_var('paged') ),
+                            'total' => $custom_query->max_num_pages
+                        ) );
+                        ?>
+                </div>
             </div>
-        <?php endif; ?>
+        <?php endif;?>
+
     </div>
 <?php get_footer(); ?>

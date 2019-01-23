@@ -29,6 +29,7 @@ function add_js_scripts() {
 
     // pass Ajax Url to script.js
     wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
+
 }
 add_action('wp_enqueue_scripts', 'add_js_scripts');
 
@@ -126,12 +127,13 @@ add_action( 'wp_ajax_nopriv_filter_city', 'filter_city' );
 function filter_city() {
     /* On récupère le paramètre en post */
     $keyword = $_POST['param'];
+    $offset = $_POST['offset'];
 
     /* Si on a effectivement un paramètre en post, on construit les arguments de la requête */
     if ($_POST['param']) {
         $args = array(
             'post_type' => 'propriete',
-            'posts_per_page' => 10,
+            'posts_per_page' => 2,
             'order' => 'DESC',
             'order by' => 'rand',
             'tax_query' => array(
@@ -146,20 +148,35 @@ function filter_city() {
     } else {
         $args = array(
             'post_type' => 'propriete',
-            'posts_per_page' => 10,
+            'posts_per_page' => 2,
             'order' => 'DESC',
             'order by' => 'rand',
         );
     }
+    if ($_POST['param']) {
+        $args = wp_parse_args($args, array('offset' => $offset));
+    }
 
-    /* On effectue la requête */
-    $ajax_query = new WP_Query($args);
+    $ajax_query = new WP_Query( $args );
+
+
 
     /* Si la requête trouve des posts, on injecte les données dans le morceau de template 'propriete-card' */
     if ( $ajax_query->have_posts() ) : while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
         get_template_part( 'propriete-card' );
     endwhile;
     endif;
+
+    echo '<div id="load-more">';
+    $big = 999999999;
+    echo paginate_links( array(
+            'base' => 'http://localhost/dcdev/wordpress/realhome/proprietes/page/%#%',
+                            'format' => '?paged=%#%',
+                            'current' => max( 1, get_query_var('paged') ),
+                            'total' => $ajax_query->max_num_pages
+                        ) );
+
+    echo '</div>';
 
     die();
 }
