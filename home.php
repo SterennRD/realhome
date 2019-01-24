@@ -3,6 +3,7 @@
         <h1 class="actualites__title">
             <?php echo $title = get_the_title(get_option('page_for_posts', true)) ?>
         </h1>
+
         <div class="row">
             <div class="col-lg-8">
                 <?php if ( have_posts() ) : ?>
