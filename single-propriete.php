@@ -2,6 +2,7 @@
     <div class="container property">
         <?php if ( have_posts() ) : ?>
             <?php while ( have_posts() ) : the_post(); ?>
+                <?php edit_post_link('<i class="fas fa-pencil-alt property__edit_icon"></i> Editer', '<div class="property__edit">', '</div>'); ?>
                 <h1 class="property__title"><?php the_title() ?></h1>
 
                 <div class="row">

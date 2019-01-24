@@ -99,6 +99,7 @@
   justify-content: center;
   margin-bottom: 65px;
   &__link {
+    border-bottom: 2px solid transparent;
     color: #3c3c3c;
     cursor: pointer;
     font-weight: 600;
@@ -106,7 +107,9 @@
     padding-left: 15px;
     padding-right: 15px;
     text-transform: uppercase;
-    &--active {
+    transition: 0.3s;
+    &--active,
+    &:hover {
       border-bottom: 2px solid #e2574c;
     }
   }

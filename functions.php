@@ -17,12 +17,9 @@ function insert_css() {
             wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
         }
     }
-    if (is_page()) {
-        global $wp_query;
-        $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
-        if ($template_name == 'single-propriete.php'){
-            wp_enqueue_style('light-gallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css');
-        }
+    if( is_singular('propriete') ) {
+        wp_enqueue_style('light-gallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css');
+
     }
 }
 
@@ -37,9 +34,11 @@ function add_js_scripts() {
         $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
         if ($template_name == 'contact.php'){
             wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js');
-            wp_enqueue_script( 'light-gallery-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery.min.js');
-            wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/gallery.js', array('jquery'), '1.0', true );
         }
+    }
+    if( is_singular('propriete') ) {
+        wp_enqueue_script( 'light-gallery-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery.min.js');
+        wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/gallery.js', array('jquery'), '1.0', true );
     }
 
     // On ajoute le js au thème
