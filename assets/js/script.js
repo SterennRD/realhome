@@ -44,7 +44,7 @@ $(document).ready(function(){
         $(this).next('.header__menu--mobile').slideToggle();
     });
 
-    $("#lightgallery").lightGallery();
+
 });
 
 

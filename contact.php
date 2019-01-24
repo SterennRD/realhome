@@ -17,7 +17,7 @@
 
                         // Fonction d'initialisation de la carte
                         function initMap() {
-                            macarte = L.map('map').setView([lat, lon], 11);
+                            macarte = L.map('map').setView([lat, lon], 16);
                             L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
                                 attribution: 'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
                                 minZoom: 1,
@@ -65,12 +65,9 @@
                         <h2 class="contact__subtitle">Envoyez-nous un message !</h2>
                         <?php the_content(); ?>
                     </div>
-
                 </div>
             </div>
         </div>
-
     <?php endwhile;?>
 <?php endif;?>
-
 <?php get_footer(); ?>

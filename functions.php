@@ -3,14 +3,27 @@ add_action('wp_enqueue_scripts', 'insert_css');
 function insert_css() {
     // On ajoute le css general du theme
     wp_enqueue_style('style', get_stylesheet_uri());
+    // Chargement de Bootstrap
     wp_enqueue_style('bootstrap', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css');
     wp_enqueue_style('style2', get_template_directory_uri() .'/style2.css');
     wp_enqueue_style('fa', 'https://use.fontawesome.com/releases/v5.6.3/css/all.css');
-    wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
-    wp_enqueue_style('light-gallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css');
 
-
-
+    if (is_page()) { // Si on est sur une page
+        global $wp_query;
+        // On regarde quel template est associé à la page qu'on regarde
+        $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+        if ($template_name == 'contact.php'){
+            //Si la page est la page contact, on charge les scripts
+            wp_enqueue_style('leaflet', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.css');
+        }
+    }
+    if (is_page()) {
+        global $wp_query;
+        $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+        if ($template_name == 'single-propriete.php'){
+            wp_enqueue_style('light-gallery', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/css/lightgallery.min.css');
+        }
+    }
 }
 
 function add_js_scripts() {
@@ -19,13 +32,22 @@ function add_js_scripts() {
     wp_enqueue_script('jquery2');
 
     wp_enqueue_script( 'fa-js', 'https://use.fontawesome.com/releases/v5.6.3/js/all.js');
-    wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js');
-    wp_enqueue_script( 'light-gallery-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery.min.js');
-
+    if (is_page()) {
+        global $wp_query;
+        $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+        if ($template_name == 'contact.php'){
+            wp_enqueue_script( 'leaflet-js', 'https://unpkg.com/leaflet@1.3.1/dist/leaflet.js');
+            wp_enqueue_script( 'light-gallery-js', 'https://cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.11/js/lightgallery.min.js');
+            wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/gallery.js', array('jquery'), '1.0', true );
+        }
+    }
 
     // On ajoute le js au thème
     wp_enqueue_script( 'script', get_template_directory_uri().'/assets/js/script.js', array('jquery'), '1.0', true );
-    wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/slide.js', array('jquery'), '1.0', true );
+
+    if (is_front_page()) {
+            wp_enqueue_script( 'script-slide', get_template_directory_uri().'/assets/js/slide.js', array('jquery'), '1.0', true );
+    }
 
     // pass Ajax Url to script.js
     wp_localize_script('script', 'ajaxurl', admin_url( 'admin-ajax.php' ) );
@@ -106,86 +128,74 @@ function themes_taxonomy() {
     );
     register_taxonomy(
         'plus',
-        'propriete', // nom du custom type
+        'propriete',
         array(
-            'label' => 'Les plus', // Nom de la taxonomie (dans le back)
-            'query_var' => true, // Pouvoir faire des requêtes
+            'label' => 'Les plus',
+            'query_var' => true,
             'rewrite' => array(
                 'slug' => 'plus',
                 'with_front' => true
             ),
-            'hierarchical' => true, // pour créer des catégories et non pas des étiquettes
+            'hierarchical' => true,
             'show_in_rest' => true,
         )
     );
 }
 add_action( 'init', 'themes_taxonomy');
 
+// Fonction de filtre des propriétés par ville
 add_action( 'wp_ajax_filter_city', 'filter_city' );
 add_action( 'wp_ajax_nopriv_filter_city', 'filter_city' );
 
 function filter_city() {
     /* On récupère le paramètre en post */
     $keyword = $_POST['param'];
-    $offset = $_POST['offset'];
 
-    /* Si on a effectivement un paramètre en post, on construit les arguments de la requête */
+    $args = array(
+            'post_type' => 'propriete',
+            'posts_per_page' => 2,
+            'order' => 'DESC',
+            'order by' => 'ID',
+
+        );
+
+    /* Si on a effectivement un paramètre en post, on ajoute les arguments de la requête */
     if ($_POST['param']) {
-        $args = array(
-            'post_type' => 'propriete',
-            'posts_per_page' => 2,
-            'order' => 'DESC',
-            'order by' => 'rand',
-            'tax_query' => array(
-                array (
-                    'taxonomy' => 'ville',
-                    'field' => 'slug',
-                    'terms' => [$keyword],
-                )
-            ),
-        );
-        /* Sinon, on construit une requête de base sans le paramètre */
-    } else {
-        $args = array(
-            'post_type' => 'propriete',
-            'posts_per_page' => 2,
-            'order' => 'DESC',
-            'order by' => 'rand',
-        );
-    }
-    if ($_POST['offset']) {
-        $args = wp_parse_args($args, array('offset' => $offset));
+        $args = wp_parse_args($args, array('tax_query' => array(
+            array (
+                'taxonomy' => 'ville',
+                'field' => 'slug',
+                'terms' => [$keyword],
+            )
+        )));
     }
 
     $ajax_query = new WP_Query( $args );
-
-
 
     /* Si la requête trouve des posts, on injecte les données dans le morceau de template 'propriete-card' */
     if ( $ajax_query->have_posts() ) : while ( $ajax_query->have_posts() ) : $ajax_query->the_post();
         get_template_part( 'propriete-card' );
     endwhile;
     endif;
-    //echo '<div id="load-more" slug="'.$keyword.'">Load more</div>';
 
+    /* On ajoute une pagination qui mènera aux pages de la taxonomie */
     echo '<div id="pagination" class="col-12 d-flex align-items-center justify-content-center">';
     $big = 999999999;
     if ($_POST['param']) {
         $base = get_bloginfo('url'). '/ville/' . $keyword .'/page/%#%';
     } else {
+        /* si on est dans la catégorie "tout", on ira sur la page propriétés */
         $base = get_bloginfo('url'). '/proprietes/page/%#%';
     }
     echo paginate_links( array(
-
         'base' => $base,
-        //'base' => str_replace( $big, '%#%', esc_url( get_pagenum_link( $big ) ) ),
         'format' => '?paged=%#%',
         'current' => max( 1, get_query_var('paged') ),
         'total' => $ajax_query->max_num_pages
     ) );
-
     echo '</div>';
 
+    /* arrêt de la fonction */
     die();
 }
 
@@ -200,6 +210,7 @@ if ( function_exists('register_sidebar') )
         'after_title' => '</h2>',
     ));
 
+/* Fonction d'affichage des commentaires */
 function mytheme_comment($comment, $args, $depth) {
     if ( 'div' === $args['style'] ) {
         $tag       = 'div';
@@ -222,7 +233,6 @@ function mytheme_comment($comment, $args, $depth) {
         <em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.' ); ?></em><br/><?php
     } ?>
     <div class="comment-right">
-
 
     <?php comment_text(); ?>
 
@@ -315,6 +325,7 @@ function get_related_posts( $taxonomy = '', $args = array() )
     return $q;
 }
 
+/* Réécriture des URLS pour les taxonomies pour la pagination */
 function taxonomy_rewrite_fix($wp_rewrite) {
     $r = array();
     foreach($wp_rewrite->rules as $k=>$v){
