@@ -5,6 +5,7 @@
                 <h1 class="property__title"><?php the_title() ?></h1>
 
                 <div class="row">
+<!--    THUMBNAIL DE LA PROPRIETE-->
                     <div class="property__img col-lg-8">
                         <?php if (has_post_thumbnail()) : ?>
                             <img src="<?php the_post_thumbnail_url('large') ?>" />
@@ -12,13 +13,16 @@
                             <div class="property__img--empty"></div>
                         <?php endif; ?>
                     </div>
-
+<!--    LES INFORMATIONS-->
                     <div class="col-lg-4">
                         <?php if(get_field('prix')): ?>
                             <?php $prix = get_field('prix');
                             $prix = number_format($prix, 2, ',', ' '); ?>
-                            <div class="property__price"><i class="fas fa-bookmark property__price--icon"></i> <?php echo $prix ?> €</div>
+                            <div class="property__price">
+                                <i class="fas fa-bookmark property__price--icon"></i> <?php echo $prix ?> €
+                            </div>
                         <?php endif; ?>
+
                         <ul class="property__info">
                             <?php if (get_the_taxonomies() ) : ?>
                                 <?php
@@ -27,7 +31,7 @@
                                 if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
                                     foreach ( $terms as $term ) {
                                         $term_link = get_term_link( $term, 'ville' );
-                                        echo '<li><label class="property__label">Ville :</label><a class="" href="' . $term_link . '">' . $term->name . '</a></li>';
+                                        echo '<li><label class="property__label">Ville :</label><a href="' . $term_link . '">' . $term->name . '</a></li>';
                                     }
                                 }
                                 ?>
@@ -49,7 +53,7 @@
                         <?php endif; ?>
                     </div>
                 </div>
-
+<!--    GALERIE DE PHOTOS-->
                 <?php if(get_field('galerie')): ?>
                     <?php $size = 'medium';$images = get_field('galerie');?>
                         <div class="property__gallery" id="lightgallery">
@@ -61,16 +65,17 @@
                         </div>
                 <?php endif; ?>
 
+<!--    LES FEATURES DE LA PROPRIETE-->
                 <div class="property__features">
                     <div class="row">
                         <?php if(get_field('m2')): ?>
                             <div class="property__features_m2 col-2"><?php the_field('m2'); ?>m²</div>
                         <?php endif; ?>
                         <?php if(get_field('dpe')): ?>
-                            <div class="col-sm-12 col-lg-8">
+                            <div class="col-sm-12 col-lg-5">
                                 <b>DPE (Diagnostic de Performance Energétique)</b>
                                 <div class="property__features_dpe d-flex">
-                                <div class="property__features_dpe_schema d-flex flex-column">
+                                    <div class="property__features_dpe_schema d-flex flex-column">
                                     <span class="d-flex align-items-center justify-content-between px-2">
                                         <= 50 <div>A</div>
                                     </span>
@@ -93,7 +98,7 @@
                                         > 451 <div>G</div>
                                     </span>
                                 </div>
-                                <?php
+                                    <?php
                                 $dpe = get_field('dpe');
                                 switch ($dpe) {
                                     case $dpe <= 50 :
@@ -127,10 +132,82 @@
                                 }
 
                                     ?>
-                                <div>
+                                    <div>
                                     <div class="property__features_dpe_letter"><?php echo $letter; ?></div>
                                     <div class="property__features_dpe_indice" style="top: <?php echo $top; ?>px;"><?php the_field('dpe'); ?></div>
                                 </div>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                        <?php if(get_field('ges')): ?>
+                            <div class="col-sm-12 col-lg-5">
+                                <b>GES (Gaz à Effet de Serre)</b>
+                                <div class="property__features_dpe d-flex">
+                                    <div class="property__features_dpe_schema d-flex flex-column">
+                                    <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        <= 5 <div>A</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        6 à 10<div>B</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        11 à 20<div>C</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        21 à 35 <div>D</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        36 à 55 <div>E</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        56 à 80 <div>F</div>
+                                    </span>
+                                        <span class="ges d-flex align-items-center justify-content-between px-2">
+                                        > 80 <div>G</div>
+                                    </span>
+                                    </div>
+                                    <?php
+                                    $ges = get_field('ges');
+                                    switch ($ges) {
+                                        case $ges <= 5 :
+                                            $letter_ges = "A";
+                                            $top_ges = 0;
+                                            break;
+                                        case $ges < 10 :
+                                            $letter_ges = "B";
+                                            $top_ges = 20;
+                                            break;
+                                        case $ges < 20 :
+                                            $letter_ges = "C";
+                                            $top_ges = 40;
+                                            break;
+                                        case $ges < 35 :
+                                            $letter_ges = "D";
+                                            $top_ges = 60;
+                                            break;
+                                        case $ges < 55 :
+                                            $letter_ges = "E";
+                                            $top_ges = 80;
+                                            break;
+                                        case $ges < 80 :
+                                            $letter_ges = "F";
+                                            $top_ges = 100;
+                                            break;
+                                        case $ges > 80 :
+                                            $letter_ges = "G";
+                                            $top_ges = 120;
+                                            break;
+                                    }
+
+                                    ?>
+                                    <div>
+                                        <div class="property__features_dpe_letter">
+                                            <?php echo $letter_ges; ?>
+                                        </div>
+                                        <div class="property__features_dpe_indice" style="top: <?php echo $top_ges; ?>px;">
+                                            <?php the_field('ges'); ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         <?php endif; ?>

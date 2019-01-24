@@ -129,37 +129,104 @@
             width: 0;
           }
           &:nth-child(1) {
-            background-color: #00872f;
+            background-color: #2bb15a;
             width: calc(100% - 60px);
+            &::after {
+              border-left-color: #2bb15a;
+            }
           }
           &:nth-child(2) {
-            background-color: #48a820;
+            background-color: #67bf43;
             width: calc(100% - 50px);
+            &::after {
+              border-left-color: #67bf43;
+            }
           }
           &:nth-child(3) {
-            background-color: #b0d811;
+            background-color: #bde228;
             width: calc(100% - 40px);
+            &::after {
+              border-left-color: #bde228;
+            }
           }
           &:nth-child(4) {
-            background-color: #f8f800;
+            background-color: #d0d019;
             width: calc(100% - 30px);
+            &::after {
+              border-left-color: #d0d019;
+            }
           }
           &:nth-child(5) {
-            background-color: #f8b000;
+            background-color: #f9be2d;
             width: calc(100% - 20px);
+            &::after {
+              border-left-color: #f9be2d;
+            }
           }
           &:nth-child(6) {
-            background-color: #f84800;
+            background-color: #f16a33;
             width: calc(100% - 10px);
+            &::after {
+              border-left-color: #f16a33;
+            }
           }
           &:nth-child(7) {
-            background-color: #f80000;
+            background-color: #e83131;
             width: 100%;
+            &::after {
+              border-left-color: #e83131;
+            }
+          }
+          &.ges {
+            &:nth-child(1) {
+              background-color: #eca2d1;
+              &::after {
+              border-left-color: #eca2d1;
+              }
+            }
+            &:nth-child(2) {
+              background-color: #ca88b1;
+              &::after {
+              border-left-color: #ca88b1;
+              }
+            }
+            &:nth-child(3) {
+              background-color: #af7098;
+              &::after {
+              border-left-color: #af7098;
+              }
+            }
+            &:nth-child(4) {
+              background-color: #986082;
+              &::after {
+              border-left-color: #986082;
+              }
+            }
+            &:nth-child(5) {
+              background-color: #775269;
+              &::after {
+              border-left-color: #775269;
+              }
+            }
+            &:nth-child(6) {
+              background-color: #67465b;
+              &::after {
+              border-left-color: #67465b;
+              }
+            }
+            &:nth-child(7) {
+              background-color: #5a4051;
+              &::after {
+              border-left-color: #5a4051;
+              }
+            }
           }
         }
       }
       &_letter {
+        color: #d6d6d6;
         font-size: 50px;
+        font-weight: 800;
         position: absolute;
         right: 10px;
         top: 0;
@@ -179,6 +246,7 @@
           height: 0;
           left: -5px;
           position: absolute;
+          top: 0;
           width: 0;
         }
       }
