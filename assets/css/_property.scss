@@ -108,6 +108,9 @@
     &_dpe {
       position: relative;
       width: 180px;
+      &_title {
+        margin: 10px 0;
+      }
       &_schema {
         margin-right: 30px;
         width: 150px;
@@ -234,6 +237,7 @@
       &_indice {
         background: #ccc;
         font-size: 10px;
+        font-weight: 800;
         height: 20px;
         line-height: 20px;
         padding: 0 5px;

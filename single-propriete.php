@@ -70,12 +70,12 @@
                     <div class="row">
                         <!-- Mètres carrés -->
                         <?php if(get_field('m2')): ?>
-                            <div class="property__features_m2 col-md-12 col-lg-2"><?php the_field('m2'); ?>m²</div>
+                            <div class="property__features_m2 col-md-12 col-lg-2 d-flex align-items-center justify-content-center"><?php the_field('m2'); ?>m²</div>
                         <?php endif; ?>
                         <!-- Diagnostic énergétique -->
                         <?php if(get_field('dpe')): ?>
                             <div class="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-between">
-                                <b>DPE (Diagnostic de Performance Energétique)</b>
+                                <b class="property__features_dpe_title">DPE (Diagnostic de Performance Energétique)</b>
                                 <div class="property__features_dpe d-flex">
                                     <div class="property__features_dpe_schema d-flex flex-column">
                                     <span class="d-flex align-items-center justify-content-between px-2">
@@ -144,7 +144,7 @@
                         <!-- Emissions de gaz -->
                         <?php if(get_field('ges')): ?>
                             <div class="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-between">
-                                <b>GES (Gaz à Effet de Serre)</b>
+                                <b class="property__features_dpe_title">GES (Gaz à Effet de Serre)</b>
                                 <div class="property__features_dpe d-flex">
                                     <div class="property__features_dpe_schema d-flex flex-column">
                                         <span class="ges d-flex align-items-center justify-content-between px-2">
@@ -223,7 +223,7 @@
                                 <i class="property__features_icon fas fa-door-closed"></i>
                                 <div>
                                     <?php the_field('nb_pieces'); ?>
-                                    <label class="property__features_label">pièces</label>
+                                    <label class="property__features_label">pièce<?php if(get_field('nb_pieces') > 1): ?>s<?php endif; ?></label>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -232,7 +232,7 @@
                                 <i class="property__features_icon fas fa-bed"></i>
                                 <div>
                                     <?php the_field('nb_chambres'); ?>
-                                    <label class="property__features_label">chambres</label>
+                                    <label class="property__features_label">chambre<?php if(get_field('nb_chambres') > 1): ?>s<?php endif; ?></label>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -241,7 +241,7 @@
                                 <i class="property__features_icon fas fa-bath"></i>
                                 <div>
                                     <?php the_field('nb_bain'); ?>
-                                    <label class="property__features_label">salles de bain</label>
+                                    <label class="property__features_label">salle<?php if(get_field('nb_bain') > 1): ?>s<?php endif; ?> de bain</label>
                                 </div>
                             </div>
                         <?php endif; ?>
@@ -262,7 +262,14 @@
                     <?php endif ?>
                 </div>
 
-                <h2 class="property__subtitle">
+                <?php
+                    /* J'appelle la fonction en amont pour afficher ou non le titre selon les résultats */
+                    if ( function_exists( 'get_related_posts' ) ) {
+                        $related_posts = get_related_posts('ville', array('posts_per_page' => 4));
+                    }
+                    if ( $related_posts ) :
+                ?>
+                    <h2 class="property__subtitle">
                     Nos <b>propriétés</b>
                     <?php if (get_the_taxonomies() ) : ?>
                         <?php
@@ -274,13 +281,12 @@
                         ?>
                     <?php endif ?>
                 </h2>
+                <?php endif; ?>
             <?php endwhile; ?>
         <?php endif; ?>
 
 <!--    PROPRIETES DE LA MÊME VILLE-->
         <?php
-        if ( function_exists( 'get_related_posts' ) ) {
-            $related_posts = get_related_posts( 'ville', array( 'posts_per_page' => 4) );
             if ( $related_posts ) {
                 echo "<div class='row'>";
                 foreach ( $related_posts as $post ) {
@@ -319,7 +325,6 @@
                 echo "</div>";
                 wp_reset_postdata();
             }
-        }
         ?>
     </div>
 <?php get_footer(); ?>
