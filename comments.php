@@ -47,13 +47,24 @@ if ( post_password_required() )
     <?php endif; // have_comments() ?>
 
     <?php
+    $fields =  array(
+
+        'author' =>
+            '<div class="d-flex justify-content-between"><p class="comment-form-author comment-form-input"><input class="comment-input" id="author" name="author" placeholder="Nom" type="text" value="' . esc_attr( $commenter['comment_author'] ) .
+            '" size="30"' . $aria_req . ' /></p>',
+
+        'email' =>
+            '<p class="comment-form-email comment-form-input"><input class="comment-input" id="email" name="email" type="text" placeholder="E-mail*" value="' . esc_attr(  $commenter['comment_author_email'] ) .
+            '" size="30"' . $aria_req . ' /></p></div>',
+
+    );
     $comment_args = array(
         'label_submit'      => __( 'Envoyer' ),
+        'fields' => apply_filters( 'comment_form_default_fields', $fields ),
 
         'comment_field' =>  '<p class="comment-form-comment"><textarea class="comment-textarea" id="comment" name="comment" cols="45" rows="4" aria-required="true" placeholder="Votre message">' .
             '</textarea></p>',
 
-        'fields' => apply_filters( 'comment_form_default_fields', $fields ),
     );
     comment_form($comment_args); ?>
 

@@ -93,9 +93,27 @@
     }
   }
 }
-.comment-textarea {
+#commentform {
+  display: flex;
+  flex-direction: column;
+}
+.comment-form-comment,
+.form-submit {
+  order: 1;
+}
+.comment-textarea,
+.comment-input {
   border: 1px solid #e6e6e6;
   border-radius: 3px;
   padding: 15px;
   width: 100%;
+}
+.comment-form-input {
+  flex: 1;
+}
+.comment-form-author {
+  margin-right: 5px;
+}
+.comment-form-email {
+  margin-left: 5px;
 }
