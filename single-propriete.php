@@ -68,11 +68,13 @@
 <!--    LES FEATURES DE LA PROPRIETE-->
                 <div class="property__features">
                     <div class="row">
+                        <!-- Mètres carrés -->
                         <?php if(get_field('m2')): ?>
-                            <div class="property__features_m2 col-2"><?php the_field('m2'); ?>m²</div>
+                            <div class="property__features_m2 col-md-12 col-lg-2"><?php the_field('m2'); ?>m²</div>
                         <?php endif; ?>
+                        <!-- Diagnostic énergétique -->
                         <?php if(get_field('dpe')): ?>
-                            <div class="col-sm-12 col-lg-5">
+                            <div class="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-between">
                                 <b>DPE (Diagnostic de Performance Energétique)</b>
                                 <div class="property__features_dpe d-flex">
                                     <div class="property__features_dpe_schema d-flex flex-column">
@@ -139,32 +141,33 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                        <!-- Emissions de gaz -->
                         <?php if(get_field('ges')): ?>
-                            <div class="col-sm-12 col-lg-5">
+                            <div class="col-sm-12 col-md-6 col-lg-5 d-flex flex-column justify-content-between">
                                 <b>GES (Gaz à Effet de Serre)</b>
                                 <div class="property__features_dpe d-flex">
                                     <div class="property__features_dpe_schema d-flex flex-column">
-                                    <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        <= 5 <div>A</div>
-                                    </span>
                                         <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        6 à 10<div>B</div>
-                                    </span>
-                                        <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        11 à 20<div>C</div>
-                                    </span>
-                                        <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        21 à 35 <div>D</div>
-                                    </span>
-                                        <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        36 à 55 <div>E</div>
-                                    </span>
-                                        <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        56 à 80 <div>F</div>
-                                    </span>
-                                        <span class="ges d-flex align-items-center justify-content-between px-2">
-                                        > 80 <div>G</div>
-                                    </span>
+                                            <= 5 <div>A</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            6 à 10<div>B</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            11 à 20<div>C</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            21 à 35 <div>D</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            36 à 55 <div>E</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            56 à 80 <div>F</div>
+                                        </span>
+                                            <span class="ges d-flex align-items-center justify-content-between px-2">
+                                            > 80 <div>G</div>
+                                        </span>
                                     </div>
                                     <?php
                                     $ges = get_field('ges');
@@ -244,47 +247,46 @@
                         <?php endif; ?>
                     </div>
 
-
-                        <?php if (get_the_taxonomies() ) : ?>
-                            <?php
-                            $terms_plus = get_the_terms( $id, 'plus' );
-                            if ( ! empty( $terms_plus ) && ! is_wp_error( $terms_plus ) ){
-                                echo '<h3 class="property__features_title">Les plus</h3>';
-                                echo '<div class="d-flex flex-wrap">';
-                                foreach ( $terms_plus as $term ) {
-                                    $term_link = get_term_link( $term, 'plus' );
-                                    echo '<div class="property__features_item mr-5 d-flex flex-column"><i class="property__features_icon fas fa-'. $term->slug .'"></i>' . $term->name . '</div>';
-                                }
-                                echo '</div>';
-                            }
-                            ?>
-                        <?php endif ?>
-
+                    <?php if (get_the_taxonomies() ) : ?>
+                        <?php
+                        $terms_plus = get_the_terms( $id, 'plus' );
+                        if ( ! empty( $terms_plus ) && ! is_wp_error( $terms_plus ) ): ?>
+                                <h3 class="property__features_title">Les plus</h3>
+                                <div class="d-flex flex-wrap">
+                                    <?php foreach ( $terms_plus as $term ) {
+                                        $term_link = get_term_link( $term, 'plus' );
+                                        echo '<div class="property__features_item mr-5 d-flex flex-column"><i class="property__features_icon fas fa-'. $term->slug .'"></i>' . $term->name . '</div>';
+                                    }?>
+                                </div>
+                        <?php endif; ?>
+                    <?php endif ?>
                 </div>
 
                 <h2 class="property__subtitle">
-            Nos <b>propriétés</b>
-            <?php if (get_the_taxonomies() ) : ?>
-                <?php
-                if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
-                    foreach ( $terms as $term ) {
-                        echo 'à ' . $term->name;
-                    }
-                }
-                ?>
-            <?php endif ?>
-        </h2>
+                    Nos <b>propriétés</b>
+                    <?php if (get_the_taxonomies() ) : ?>
+                        <?php
+                        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ){
+                            foreach ( $terms as $term ) {
+                                echo 'à ' . $term->name;
+                            }
+                        }
+                        ?>
+                    <?php endif ?>
+                </h2>
             <?php endwhile; ?>
         <?php endif; ?>
 
-        <?php if ( function_exists( 'get_related_posts' ) ) {
+<!--    PROPRIETES DE LA MÊME VILLE-->
+        <?php
+        if ( function_exists( 'get_related_posts' ) ) {
             $related_posts = get_related_posts( 'ville', array( 'posts_per_page' => 4) );
             if ( $related_posts ) {
                 echo "<div class='row'>";
                 foreach ( $related_posts as $post ) {
                     setup_postdata( $post ); ?>
 
-                    <div class="col-lg-3">
+                    <div class="col-sm-12 col-md-6 col-lg-3">
                         <a class="d- flex-column" href="<?php the_permalink(); ?>">
 
                             <?php if (has_post_thumbnail()) : ?>
@@ -319,6 +321,5 @@
             }
         }
         ?>
-
     </div>
 <?php get_footer(); ?>
